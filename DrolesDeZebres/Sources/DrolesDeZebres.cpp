@@ -16,7 +16,7 @@ int main(int argc, char **argv) {
 	Plateau plateau(Plateau::CONFIGURATIONSTANDARD);
 	map<char, int> impalaPositions;
 
-
+	cout<<"TEST"<<endl;
 	cout << "cases[0][0] = "<<plateau.getCases()[0][0]->getIdSecteur() << endl;
 	//cout << "cases[0][0] = "<<conf[1][1].getIdSecteur()<<endl;
 }
