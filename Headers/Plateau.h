@@ -58,6 +58,44 @@ public:
 		this->cases = cases;
 	}
 
+	void afficher() {
+		char c[9][11];
+		
+		for (int i = 0; i < 5; i++){
+			for (int j = 0; j < 5; j++){
+				if (cases[i][j]->getIdSecteur() != cases[i][j + 1]->getIdSecteur()){
+						c[2*i][2 * j + 1] = '|';
+				}
+				else c[2*i][2 * j + 1] = ' ';
+			}
+		}
+
+		for (int i = 0; i < 6; i++){
+			for (int j = 0; j < 4; j++){
+				c[2*j+1][2*i + 1] =' ';
+				if (cases[j][i]->getIdSecteur() != cases[j+1][i]->getIdSecteur()){
+					c[2*j+1][2 * i] = '-';
+				}
+				else c[2*j+1][2 * i] = ' ';
+			}
+		}
+
+		for (int i = 0; i < 5; i++){
+			for (int j = 0; j < 6; j++){
+				//c[2 * i][2 * j] = (char)cases[i][j]->getIdSecteur;
+				c[2 * i][2 * j] = '0';
+			}
+		}
+
+		// afficher la table de char 
+		for (int i = 0; i < 9; i++){
+			cout << endl;
+			for (int j = 0; j < 11; j++){
+				cout << c[i][j];
+			}
+		}
+		cout << endl;
+	}
 protected:
 private:
 	vector<vector<Case*>> cases;
