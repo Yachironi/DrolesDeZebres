@@ -14,7 +14,7 @@ public:
 protected:
 private:
 	int position;
-
+	string positions[22] = { "C1", "C2", "C3", "C4", "C5", "C6", "L1","L2","L3","L4","L5","C6","C5","C4","C3","C2","C1","L5","L4","L3","L2","L1" };
 };
 
 #endif
