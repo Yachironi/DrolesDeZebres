@@ -13,7 +13,7 @@
 class Zebre: public Animal {
 public:
 	Zebre() :
-			Animal(false, 6, -1, EFFRAYE) {
+			Animal(false, 6, -1, EFFRAYE,"Zebre") {
 	}
 	~Zebre() {
 

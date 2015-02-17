@@ -16,7 +16,7 @@ class Gazelle : public Animal
 {
 public:
 	Gazelle() :
-			Animal(false, 2, -1, EFFRAYE) {
+			Animal(false, 2, -1, EFFRAYE,"Gazelle") {
 	}
 	~Gazelle() {
 

@@ -16,13 +16,14 @@ using namespace std;
 
 class Pion {
 public:
-	Pion(bool cache, int valeur, int idJoueur) {
+	Pion(bool cache, int valeur, int idJoueur,string intitulePion) {
 		this->cache = cache;
 		this->valeur = valeur;
 		this->position = position;
 		this->idJoueur = idJoueur;
 		this->position.x = -1;
 		this->position.y = -1;
+		this->intitulePion=intitulePion;
 	}
 	~Pion() {
 
@@ -50,12 +51,25 @@ public:
 	int getValeur() const {
 		return valeur;
 	}
+	friend ostream& operator<<(ostream& os, const Pion& pion) {
+		pion.isCache() ? os << "#" : os << pion.intitulePion;
+				return os;
+			}
+
+	const string& getIntitulePion() const {
+		return intitulePion;
+	}
+
+	void setIntitulePion(const string& intitulePion) {
+		this->intitulePion = intitulePion;
+	}
 
 protected:
 	bool cache; /* Pion cache ou pas {True , False}*/
 	int valeur; /* Le nombre de points du pion */
 	Position position; /* Position du pion sur le plateau */
 	int idJoueur;
+	string intitulePion;
 private:
 
 };

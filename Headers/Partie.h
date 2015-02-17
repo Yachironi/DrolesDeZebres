@@ -25,7 +25,7 @@ public:
 	 * */
 	void start(){
 		cout<<"Partie.start() : Jeux Commencé !!!"<<endl;
-
+		cout<<*plateau;
 	}
 
 protected:

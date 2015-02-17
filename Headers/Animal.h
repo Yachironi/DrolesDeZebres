@@ -15,7 +15,7 @@ using namespace std;
 
 class Animal: public Pion {
 public:
-	Animal(bool cache, int valeur,int idJoueur,TypeAnimal type):Pion(cache,valeur,idJoueur),type(type){
+	Animal(bool cache, int valeur,int idJoueur,TypeAnimal type,string intitulePion):Pion(cache,valeur,idJoueur,intitulePion),type(type){
 	}
 	TypeAnimal getType() const {
 		return type;
