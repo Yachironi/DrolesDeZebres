@@ -16,7 +16,8 @@ public:
 		this->position=-1;
 	}
 	~ImpalaJones(){}
-	int* getPosition()  {
+
+	int* getPositionPossible()  {
 		//TODO (2,-1,-1)
 		int* positionsPossible= new int[3];
 
@@ -25,6 +26,10 @@ public:
 
 	void setPosition(int position) {
 		this->position = position;
+	}
+
+	int getPosition() const {
+		return position;
 	}
 
 protected:
