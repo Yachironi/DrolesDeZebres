@@ -20,7 +20,7 @@ using namespace std;
 class Plateau {
 public:
 	static vector<vector<Case*>> CONFIGURATIONDUPRESIDENT;
-	static vector<vector<Case*>> CONFIGURATIONSTANDARD;
+	static vector<vector<Case*>> CONFIGURATIONSTANDARD; // configuration 0
 	static int configuration ;
 	static vector<vector<Case*>> getConfigurationDuPresident(){
 		// TODO Verification de la configuration
@@ -61,7 +61,18 @@ public:
 		this->cases = cases;
 	}
 	friend ostream& operator<<(ostream& os, const Plateau& plateau) {
-		os<<plateau.cases[0][0]<<endl;
+		if(configuration==0){
+			os<<*plateau.cases[0][0]<<" | "<<*plateau.cases[0][1]<<" | "<<*plateau.cases[0][2]<<"   "<<*plateau.cases[0][3]<<"   "<<*plateau.cases[0][4]<<" "<<*plateau.cases[0][5]<<endl;
+			os<<"   "				<<" | "<<"   "				 <<" | "<<"   "				  <<" "  <<"   "			   <<"   "<<"   "				<<" "<<"  "				  <<endl;
+			os<<*plateau.cases[1][0]<<"   "<<*plateau.cases[0][1]<<" | "<<*plateau.cases[0][2]<<"   "<<*plateau.cases[0][3]<<"   "<<*plateau.cases[0][4]<<" "<<*plateau.cases[0][5]<<endl;
+			os<<"   "				<<" | "<<"   "				 <<" | "<<"   "				  <<" "  <<"   "			   <<"   "<<"   "				<<" "<<"  "				  <<endl;
+			os<<*plateau.cases[2][0]<<" | "<<*plateau.cases[0][1]<<" | "<<*plateau.cases[0][2]<<" "<<*plateau.cases[0][3]<<"   "<<*plateau.cases[0][4]<<" "<<*plateau.cases[0][5]<<endl;
+			os<<"   "				<<" | "<<"   "				 <<" | "<<"   "				  <<" "  <<"   "			   <<"   "<<"   "				<<" "<<"  "				  <<endl;
+			os<<*plateau.cases[3][0]<<" | "<<*plateau.cases[0][1]<<" | "<<*plateau.cases[0][2]<<" "<<*plateau.cases[0][3]<<"   "<<*plateau.cases[0][4]<<" "<<*plateau.cases[0][5]<<endl;
+			os<<"   "				<<" | "<<"   "				 <<" | "<<"   "				  <<" "  <<"   "			   <<"   "<<"   "				<<" "<<"  "				  <<endl;
+			os<<*plateau.cases[4][0]<<" | "<<*plateau.cases[0][1]<<" | "<<*plateau.cases[0][2]<<"   "<<*plateau.cases[0][3]<<"   "<<*plateau.cases[0][4]<<" "<<*plateau.cases[0][5]<<endl;
+		}
+
 		os<<"tableau"<<endl;
 			return os;
 		}
