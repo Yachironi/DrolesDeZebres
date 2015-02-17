@@ -15,6 +15,16 @@ using namespace std;
 class Gazelle : public Animal
 {
 public:
+	Gazelle() :
+			Animal(false, 2, -1, EFFRAYE) {
+	}
+	~Gazelle() {
+
+	}
+	friend ostream& operator<<(ostream& os, const Gazelle& gazelle) {
+		gazelle.isCache() ? os << "#" : os << "G";
+		return os;
+	}
 protected:
 private:
 

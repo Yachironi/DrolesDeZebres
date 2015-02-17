@@ -15,6 +15,8 @@ using namespace std;
 class Humain : public Joueur
 {
 public:
+	Humain(string pseudo) :Joueur(pseudo){
+		}
 protected:
 private:
 

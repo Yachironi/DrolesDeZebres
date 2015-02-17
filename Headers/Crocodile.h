@@ -14,14 +14,15 @@ using namespace std;
 
 class Crocodile: public Animal {
 public:
-	Crocodile(){
-		cache=false;
-		valeur=0;
-		type=SAUTEUR;
-		position={-1,-1};
+	Crocodile() :
+			Animal(false, 0, -1, SAUTEUR) {
 	}
-	~Crocodile(){
+	~Crocodile() {
 
+	}
+	friend ostream& operator<<(ostream& os, const Crocodile& crocodile) {
+		crocodile.isCache() ? os << "#" : os << "C";
+		return os;
 	}
 
 protected:

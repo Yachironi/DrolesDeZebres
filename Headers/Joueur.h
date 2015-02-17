@@ -7,21 +7,46 @@
 
 #if !defined(__ImpalaJones_Joueur_h)
 #define __ImpalaJones_Joueur_h
+
+#include <string>
+#include <vector>
+
+#include "Crocodile.h"
+#include "Elephant.h"
+#include "Gazelle.h"
+#include "Lion.h"
 #include "Pion.h"
+#include "Zebre.h"
+
 using namespace std;
 
 class Pion;
 
-class Joueur
-{
+class Joueur {
+	static int id;
 public:
-   Pion** pion;
+	Joueur(string pseudo) :
+			pseudo(pseudo) {
+		this->score = 0;
+		this->idJoeur = id++;
+		this->pseudo = pseudo;
+		/* Ajout des pions du joueur */
+		for (unsigned int i = 0; i < 6; ++i) pion.push_back(new Gazelle());
+		for (unsigned int i = 0; i < 5; ++i) pion.push_back(new Zebre());
+		pion.push_back(new Elephant());
+		pion.push_back(new Lion());
+		pion.push_back(new Crocodile());
+		pion.push_back(new Crocodile());
+
+	}
 
 protected:
 private:
-   int score;
-
-
+	vector<Pion*> pion;
+	int score;
+	int idJoeur;
+	string pseudo;
 };
+int Joueur::id = 0;
 
 #endif

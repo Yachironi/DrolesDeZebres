@@ -11,6 +11,10 @@ using namespace std;
 
 class ImpalaJones {
 public:
+	ImpalaJones(){
+		this->position=-1;
+	}
+	~ImpalaJones(){}
 protected:
 private:
 	int position;

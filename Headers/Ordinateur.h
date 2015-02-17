@@ -16,6 +16,8 @@ using namespace std;
 class Ordinateur : public Joueur
 {
 public:
+	Ordinateur() :Joueur("Ordinateur"){
+		}
 protected:
 private:
 

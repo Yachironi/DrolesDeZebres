@@ -10,9 +10,18 @@
 
 #include "Animal.h"
 
-class Zebre : public Animal
-{
+class Zebre: public Animal {
 public:
+	Zebre() :
+			Animal(false, 6, -1, EFFRAYE) {
+	}
+	~Zebre() {
+
+	}
+	friend ostream& operator<<(ostream& os, const Zebre& zebre) {
+		zebre.isCache() ? os << "#" : os << "Z";
+		return os;
+	}
 protected:
 private:
 

@@ -8,6 +8,8 @@
 #if !defined(__ImpalaJones_Elephant_h)
 #define __ImpalaJones_Elephant_h
 
+#include "Type.h"
+
 using namespace std;
 
 #include "Animal.h"
@@ -15,6 +17,14 @@ using namespace std;
 class Elephant : public Animal
 {
 public:
+	Elephant():Animal(false,4,-1,NEUTRE){
+	}
+	~Elephant(){};
+    friend ostream& operator<<(ostream& os, const Elephant& elephant){
+    	elephant.isCache()?os << "#":os << "E";
+    	 return os;
+    }
+
 protected:
 private:
 

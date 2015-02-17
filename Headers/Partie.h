@@ -13,20 +13,26 @@
 
 using namespace std;
 
-
-class Plateau;
-class ImpalaJones;
-class Joueur;
-
 class Partie {
 public:
-	Plateau** plateau;
-	ImpalaJones** impalaJones;
-	Joueur** joueur;
+	Partie(Plateau* plateau,ImpalaJones* impalaJones,vector<Joueur*> joueurs):plateau(plateau),impalaJones(impalaJones),joueurs(joueurs){
+	}
+	~Partie(){
+
+	}
+	/*
+	 * Le jeux se deroule principalement ici
+	 * */
+	void start(){
+		cout<<"Partie.start() : Jeux Commencé !!!"<<endl;
+
+	}
 
 protected:
 private:
-
+	Plateau* plateau;
+	ImpalaJones* impalaJones;
+	vector<Joueur*> joueurs;
 };
 
 #endif

@@ -9,11 +9,14 @@
 #define __ImpalaJones_Animal_h
 
 #include "Pion.h"
+#include "Type.h"
 
 using namespace std;
 
 class Animal: public Pion {
 public:
+	Animal(bool cache, int valeur,int idJoueur,TypeAnimal type):Pion(cache,valeur,idJoueur),type(type){
+	}
 	TypeAnimal getType() const {
 		return type;
 	}

@@ -51,16 +51,11 @@ public:
 		return valeur;
 	}
 
-	string getIntitulePion() {
-		return intitulePion;
-	}
-
 protected:
 	bool cache; /* Pion cache ou pas {True , False}*/
 	int valeur; /* Le nombre de points du pion */
 	Position position; /* Position du pion sur le plateau */
 	int idJoueur;
-	string intitulePion; /* Le type de pion */
 private:
 
 };
