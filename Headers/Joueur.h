@@ -35,15 +35,15 @@ public:
 	Joueur(string pseudo) :
 			pseudo(pseudo) {
 		this->score = 0;
-		this->idJoeur = id++;
+		this->idJoueur = id++;
 		this->pseudo = pseudo;
 		/* Ajout des pions du joueur */
-		for (unsigned int i = 0; i < 6; ++i) pion.push_back(new Gazelle());
-		for (unsigned int i = 0; i < 5; ++i) pion.push_back(new Zebre());
-		pion.push_back(new Elephant());
-		pion.push_back(new Lion());
-		pion.push_back(new Crocodile());
-		pion.push_back(new Crocodile());
+		for (unsigned int i = 0; i < 6; i++) pions.push_back(new Gazelle(idJoueur));
+		for (unsigned int i = 0; i < 5; i++) pions.push_back(new Zebre(idJoueur));
+		pions.push_back(new Elephant(idJoueur));
+		pions.push_back(new Lion(idJoueur));
+		pions.push_back(new Crocodile(idJoueur));
+		pions.push_back(new Crocodile(idJoueur));
 	}
 	void jouer(Plateau* plateau,ImpalaJones* impalaJones){
 		cout<<"Tour Joueur "<<pseudo<<endl;
@@ -52,11 +52,47 @@ public:
 		cin>>x;
 	}
 
+	int getIdJoueur() const {
+		return idJoueur;
+	}
+
+	void setIdJoueur(int idJoueur) {
+		this->idJoueur = idJoueur;
+	}
+
+	const string& getPseudo() const {
+		return pseudo;
+	}
+
+	void setPseudo(const string& pseudo) {
+		this->pseudo = pseudo;
+	}
+
+	int getScore() const {
+		return score;
+	}
+
+	void setScore(int score) {
+		this->score = score;
+	}
+
+	const vector<int>& getInauguration() const {
+		return inauguration;
+	}
+
+	void setInauguration(const vector<int>& inauguration) {
+		this->inauguration = inauguration;
+	}
+
+	void addInaugurationForIdScteur(int idSecteur){
+		inauguration.push_back(idSecteur);
+	}
 protected:
 private:
-	vector<Pion*> pion;
+	vector<Pion*> pions;
+	vector<int> inauguration;
 	int score;
-	int idJoeur;
+	int idJoueur;
 	string pseudo;
 };
 int Joueur::id = 0;

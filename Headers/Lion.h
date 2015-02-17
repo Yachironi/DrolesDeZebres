@@ -15,8 +15,8 @@ using namespace std;
 
 class Lion: public Animal {
 public:
-	Lion() :
-			Animal(false, 1, -1, EFFRAYANT,"Lion") {
+	Lion(int idJoueur) :
+			Animal(false, 1, idJoueur, EFFRAYANT,"Lion") {
 	}
 	~Lion() {
 

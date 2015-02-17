@@ -17,6 +17,9 @@ public:
 	}
 	~ImpalaJones(){}
 
+	/**
+	 * if getPositionPossible()==(-1,-1,-1) => false else true
+	 */
 	bool isPositionPossibleExist(){
 		if((getPositionPossible()[0])==-1&&(getPositionPossible()[0]==-1)&&(getPositionPossible()[0]==-1)){
 			return false;

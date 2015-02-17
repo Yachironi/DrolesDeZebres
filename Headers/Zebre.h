@@ -13,8 +13,8 @@
 
 class Zebre: public Animal {
 public:
-	Zebre() :
-			Animal(false, 6, -1, EFFRAYE,"Zebre") {
+	Zebre(int idJoueur) :
+			Animal(false, 6, idJoueur, EFFRAYE,"Zebre") {
 	}
 	~Zebre() {
 
