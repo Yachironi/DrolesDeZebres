@@ -30,6 +30,7 @@ public:
 		this->score = 0;
 		this->idJoeur = id++;
 		this->pseudo = pseudo;
+		/* Ajout des pions du joueur */
 		for (unsigned int i = 0; i < 6; ++i) pion.push_back(new Gazelle());
 		for (unsigned int i = 0; i < 5; ++i) pion.push_back(new Zebre());
 		pion.push_back(new Elephant());
@@ -37,14 +38,6 @@ public:
 		pion.push_back(new Crocodile());
 		pion.push_back(new Crocodile());
 
-		/*pion = {
-			new Gazelle(),new Gazelle(),new Gazelle(),
-			new Gazelle(),new Gazelle(),new Gazelle(),
-			new Zebre(),new Zebre(),new Zebre(),new Zebre(),new Zebre(),
-			new Elephant(),
-			new Lion(),
-			new Crocodile(),new Crocodile()
-		};*/
 	}
 
 protected:

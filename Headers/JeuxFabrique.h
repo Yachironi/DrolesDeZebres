@@ -94,20 +94,19 @@ Partie* JeuxFabrique::initJeux() {
 }
 
 Partie* JeuxFabrique::initJeuxSauvgarde() {
-	Partie* partieFabrique;
+	Partie* partieFabrique = NULL;
 	string initJeuxSauvgarde;
 	while (initJeuxSauvgarde != "NON TROUVE") {
 		cout << "Fichier non trouve" << endl;
 	}
 	return partieFabrique;
-	return NULL;
 }
 
 Partie* JeuxFabrique::initMultijoueur() {
 	Partie* partieFabrique;
 	cout << "Jeux Multjoureur :" << endl;
 	Plateau* plateau = new Plateau(Plateau::CONFIGURATIONSTANDARD);
-	ImpalaJones* impalaJones;
+	ImpalaJones* impalaJones = new ImpalaJones();
 	vector<Joueur*> joueurs;
 	string pseudo;
 	cout<<"Veuillez saisir le pseudo du premier joueur : ";
@@ -116,12 +115,11 @@ Partie* JeuxFabrique::initMultijoueur() {
 	cout<<"Veuillez saisir le pseudo du deuxieme joueur : ";
 	cin>>pseudo;
 	joueurs.push_back(new Joueur(pseudo));
-	joueurs.push_back(new Joueur(pseudo));
 	partieFabrique = new Partie(plateau,impalaJones,joueurs);
 	return partieFabrique;
 }
 Partie* JeuxFabrique::initContrePC() {
-	Partie* partieFabrique;
+	Partie* partieFabrique = NULL;
 	cout << "Jeux contre PC" << endl;
 	return partieFabrique;
 }
