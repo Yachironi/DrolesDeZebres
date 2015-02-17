@@ -9,6 +9,9 @@
 #if !defined(__ImpalaJones_Joueur_h)
 #define __ImpalaJones_Joueur_h
 
+
+
+#include <iostream>
 #include <string>
 #include <vector>
 
@@ -18,6 +21,9 @@
 #include "Lion.h"
 #include "Pion.h"
 #include "Zebre.h"
+
+class ImpalaJones;
+class Plateau;
 
 using namespace std;
 
@@ -38,7 +44,12 @@ public:
 		pion.push_back(new Lion());
 		pion.push_back(new Crocodile());
 		pion.push_back(new Crocodile());
-
+	}
+	void jouer(Plateau* plateau,ImpalaJones* impalaJones){
+		cout<<"Tour Joueur "<<pseudo<<endl;
+		cout<<"Veillez seaisir votre"<<endl;
+		int x;
+		cin>>x;
 	}
 
 protected:

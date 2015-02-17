@@ -26,7 +26,11 @@ public:
 	 * */
 	void start(){
 		cout<<"Partie.start() : Jeux Commencé !!!"<<endl;
+		Pion* pion = new Zebre();
+		pion->setCache(true);
+		plateau->setCases(0,0,pion);
 		cout<<*plateau;
+		joueurs[0]->jouer(plateau,impalaJones);
 	}
 
 protected:
