@@ -57,26 +57,82 @@ public:
 		return cases;
 	}
 
-	void setCases(const vector<vector<Case*> >& cases) {
-		this->cases = cases;
+	void setCases(int i, int j,Pion* pion) {
+		this->cases[i][j]->pion = pion;
 	}
+
 	friend ostream& operator<<(ostream& os, const Plateau& plateau) {
-		if(configuration==0){
-			os<<*plateau.cases[0][0]<<" | "<<*plateau.cases[0][1]<<" | "<<*plateau.cases[0][2]<<"   "<<*plateau.cases[0][3]<<"   "<<*plateau.cases[0][4]<<" "<<*plateau.cases[0][5]<<endl;
-			os<<"   "				<<" | "<<"   "				 <<" | "<<"   "				  <<" "  <<"   "			   <<"   "<<"   "				<<" "<<"  "				  <<endl;
-			os<<*plateau.cases[1][0]<<"   "<<*plateau.cases[0][1]<<" | "<<*plateau.cases[0][2]<<"   "<<*plateau.cases[0][3]<<"   "<<*plateau.cases[0][4]<<" "<<*plateau.cases[0][5]<<endl;
-			os<<"   "				<<" | "<<"   "				 <<" | "<<"   "				  <<" "  <<"   "			   <<"   "<<"   "				<<" "<<"  "				  <<endl;
-			os<<*plateau.cases[2][0]<<" | "<<*plateau.cases[0][1]<<" | "<<*plateau.cases[0][2]<<" "<<*plateau.cases[0][3]<<"   "<<*plateau.cases[0][4]<<" "<<*plateau.cases[0][5]<<endl;
-			os<<"   "				<<" | "<<"   "				 <<" | "<<"   "				  <<" "  <<"   "			   <<"   "<<"   "				<<" "<<"  "				  <<endl;
-			os<<*plateau.cases[3][0]<<" | "<<*plateau.cases[0][1]<<" | "<<*plateau.cases[0][2]<<" "<<*plateau.cases[0][3]<<"   "<<*plateau.cases[0][4]<<" "<<*plateau.cases[0][5]<<endl;
-			os<<"   "				<<" | "<<"   "				 <<" | "<<"   "				  <<" "  <<"   "			   <<"   "<<"   "				<<" "<<"  "				  <<endl;
-			os<<*plateau.cases[4][0]<<" | "<<*plateau.cases[0][1]<<" | "<<*plateau.cases[0][2]<<"   "<<*plateau.cases[0][3]<<"   "<<*plateau.cases[0][4]<<" "<<*plateau.cases[0][5]<<endl;
+			char c[11][13];
+					for (int i = 0; i < 5; i++){
+						for (int j = 0; j < 5; j++){
+							if (plateau.cases[i][j]->getIdSecteur() != plateau.cases[i][j + 1]->getIdSecteur()){
+								c[2 * i + 1][2 * j + 2] = '|';
+							}
+							else c[2 * i + 1][2 * j + 2] = ' ';
+						}
+					}
+
+					for (int i = 0; i < 6; i++){
+						for (int j = 0; j < 4; j++){
+							c[2 * j + 2][2 * i] = ' ';
+							if (plateau.cases[j][i]->getIdSecteur() != plateau.cases[j + 1][i]->getIdSecteur()){
+								c[2 * j + 2][2 * i + 1] = '-';
+							}
+							else c[2 * j + 2][2 * i + 1] = ' ';
+						}
+					}
+
+					for (int i = 0; i < 5; i++){
+						for (int j = 0; j < 6; j++){
+							if (plateau.cases[i][j]->pion == NULL){
+								c[2 * i + 1][2 * j + 1] = '0';
+							}
+							else if(plateau.cases[i][j]->pion->isCache()){
+								c[2 * i + 1][2 * j + 1] = '#';
+							}
+							else {
+								string pionType = plateau.cases[i][j]->pion->getIntitulePion();
+								//Le Zebre
+								if (pionType == "Zebre") c[2 * i + 1][2 * j + 1] = 'Z';
+								//La Gazelle
+								else if (pionType == "Gazelle") c[2 * i + 1][2 * j + 1] = 'G';
+								//Le Lion
+								else if (pionType == "Lion") c[2 * i + 1][2 * j + 1] = 'L';
+								//L'Elephant
+								else if (pionType == "Elephant") c[2 * i + 1][2 * j + 1] = 'L';
+								//Le Crocodile
+								else if (pionType == "Elephant") c[2 * i + 1][2 * j + 1] = '0';
+							}
+						}
+					}
+
+					// afficher le chemin d'Impala Jones
+					c[0][0] = 'X';
+					c[0][12] = 'X';
+					c[10][0] = 'X';
+					c[10][12] = 'X';
+
+					for (int i = 1; i < 12; i++){
+						c[0][i] = ' ';
+						c[10][i] = ' ';
+					}
+					for (int i = 1; i < 10; i++){
+						c[i][0] = ' ';
+						c[i][12] = ' ';
+					}
+
+					// afficher la table de char
+					for (int i = 0; i < 11; i++){
+						os << endl;
+						for (int j = 0; j < 13; j++){
+							os << c[i][j];
+						}
+					}
+					os << endl;
+					return os;
 		}
 
-		os<<"tableau"<<endl;
-			return os;
-		}
-/*
+	/*
 	void afficher() {
 		//char c[9][11];
 		char c[11][13];
@@ -103,6 +159,9 @@ public:
 			for (int j = 0; j < 6; j++){
 				if (cases[i][j]->pion == NULL){
 					c[2 * i + 1][2 * j + 1] = '0';
+				}
+				else if(cases[i][j]->pion->isCache()){
+					c[2 * i + 1][2 * j + 1] = '#';
 				}
 				else {
 					string pionType = cases[i][j]->pion->getIntitulePion();

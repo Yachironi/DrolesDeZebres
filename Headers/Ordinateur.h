@@ -1,3 +1,4 @@
+
 /***********************************************************************
  * Module:  Ordinateur.h
  * Author:  Yasser RABI & Zheng ZHANG
@@ -24,3 +25,4 @@ private:
 };
 
 #endif
+
