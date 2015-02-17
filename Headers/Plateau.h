@@ -166,15 +166,15 @@ public:
 									else {
 										string pionType = plateau.cases[i][j]->pion->getIntitulePion();
 										//Le Zebre
-										if (pionType == "Zebre") c[2 * i + 2][2 * j + 3] = 'Z';
+										if (pionType == "Zebre") c[2 * i + 2][5 * j + 3] = "--Z-";
 										//La Gazelle
-										else if (pionType == "Gazelle") c[2 * i + 2][2 * j + 3] = 'G';
+										else if (pionType == "Gazelle") c[2 * i + 2][5 * j + 3] = 'G';
 										//Le Lion
-										else if (pionType == "Lion") c[2 * i + 2][2 * j + 3] = 'L';
+										else if (pionType == "Lion") c[2 * i + 2][5 * j + 3] = 'L';
 										//L'Elephant
-										else if (pionType == "Elephant") c[2 * i + 2][2 * j + 3] = 'L';
+										else if (pionType == "Elephant") c[2 * i + 2][5 * j + 3] = 'L';
 										//Le Crocodile
-										else if (pionType == "Elephant") c[2 * i + 2][2 * j + 3] = '0';
+										else if (pionType == "Elephant") c[2 * i + 2][5 * j + 3] = '0';
 									}
 								}
 							}
@@ -219,7 +219,6 @@ public:
 							c[6][33] = '8';
 							c[8][33] = '9';
 							c[10][33] = "10";
-							c[1][29] = '5';
 							c[10][0] = "17";
 							c[8][0] = "18";
 							c[6][0] = "19";
