@@ -35,7 +35,7 @@ public:
 
 		static vector<vector<Case*>> getConfigurationStandard(){
 			// TODO Verification de la configuration
-			vector<vector<Case*>> configurationStandard = 	{
+			vector<vector<Case*>> configurationStandard = {
 				{new Case(0),new Case(2),new Case(3),new Case(3),new Case(3),new Case(3)},
 				{new Case(0),new Case(2),new Case(2),new Case(3),new Case(5),new Case(5)},
 				{new Case(0),new Case(0),new Case(2),new Case(3),new Case(3),new Case(5)},
