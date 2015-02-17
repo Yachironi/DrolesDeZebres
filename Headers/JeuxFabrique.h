@@ -36,7 +36,7 @@ Partie* JeuxFabrique::init() {
 	Partie* partieFabrique;
 	string typeJeux;
 	cout << "Veillez saisir le type de jeux :" << endl;
-	cout << "1 - Nouvelle partie \n2 - Charger une partie\n0 - Quit" << endl;
+	cout << "1 - Nouvelle partie \n2 - Charger une partie\n3 - Quit" << endl;
 	cin >> typeJeux;
 	int typeJeuxInt = atoi(typeJeux.c_str());
 	while (typeJeuxInt != 1 && typeJeuxInt != 2 && typeJeuxInt != 3) {
@@ -109,8 +109,14 @@ Partie* JeuxFabrique::initMultijoueur() {
 	Plateau* plateau = new Plateau(Plateau::CONFIGURATIONSTANDARD);
 	ImpalaJones* impalaJones;
 	vector<Joueur*> joueurs;
-	joueurs.push_back(new Joueur("Joueur 1"));
-	joueurs.push_back(new Joueur("Joueur 2"));
+	string pseudo;
+	cout<<"Veuillez saisir le pseudo du premier joueur : ";
+	cin>>pseudo;
+	joueurs.push_back(new Joueur(pseudo));
+	cout<<"Veuillez saisir le pseudo du deuxieme joueur : ";
+	cin>>pseudo;
+	joueurs.push_back(new Joueur(pseudo));
+	joueurs.push_back(new Joueur(pseudo));
 	partieFabrique = new Partie(plateau,impalaJones,joueurs);
 	return partieFabrique;
 }
