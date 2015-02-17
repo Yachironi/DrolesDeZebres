@@ -58,7 +58,7 @@ public:
 	void setCases(const vector<vector<Case*> >& cases) {
 		this->cases = cases;
 	}
-
+/*
 	void afficher() {
 		//char c[9][11];
 		char c[11][13];
@@ -125,7 +125,7 @@ public:
 			}
 		}
 		cout << endl;
-	}
+	}*/
 
 protected:
 private:
