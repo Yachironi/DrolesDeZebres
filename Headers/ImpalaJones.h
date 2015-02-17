@@ -17,6 +17,13 @@ public:
 	}
 	~ImpalaJones(){}
 
+	bool isPositionPossibleExist(){
+		if((getPositionPossible()[0])==-1&&(getPositionPossible()[0]==-1)&&(getPositionPossible()[0]==-1)){
+			return false;
+		}else{
+			return true;
+		}
+	}
 	int* getPositionPossible()  {
 		//TODO (2,-1,-1)
 		int* positionsPossible= new int[3];
