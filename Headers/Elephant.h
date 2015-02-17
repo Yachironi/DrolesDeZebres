@@ -18,7 +18,7 @@ using namespace std;
 class Elephant : public Animal
 {
 public:
-	Elephant():Animal(false,4,-1,NEUTRE,"Elephant"){
+	Elephant(int idJoueur):Animal(false,4,idJoueur,NEUTRE,"Elephant"){
 	}
 	~Elephant(){};
     friend ostream& operator<<(ostream& os, const Elephant& elephant){

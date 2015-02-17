@@ -65,6 +65,10 @@ public:
 		this->intitulePion = intitulePion;
 	}
 
+int getIdJoueur() const {
+		return idJoueur;
+	}
+
 protected:
 	bool cache; /* Pion cache ou pas {True , False}*/
 	int valeur; /* Le nombre de points du pion */
