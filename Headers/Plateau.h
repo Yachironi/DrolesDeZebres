@@ -61,6 +61,7 @@ public:
 		this->cases[i][j]->pion = pion;
 	}
 
+
 	friend ostream& operator<<(ostream& os, const Plateau& plateau) {
 		/*
 		char c[11][13];
@@ -219,6 +220,18 @@ public:
 							c[6][33] = '8';
 							c[8][33] = '9';
 							c[10][33] = "10";
+							c[12][29] = '1';
+							c[12][30] = '1';
+							c[12][24] = '1';
+							c[12][25] = '2';
+							c[12][19] = '1';
+							c[12][20] = '3';
+							c[12][14] = '1';
+							c[12][15] = '4';
+							c[12][9] = '1';
+							c[12][10] = '5';
+							c[12][4] = '1';
+							c[12][5] = '6';
 							c[10][0] = "17";
 							c[8][0] = "18";
 							c[6][0] = "19";
@@ -236,11 +249,15 @@ public:
 							return os;
 		}
 
+	string getImpalaPositions(int position) const {
+		return impalaPositions[position];
+	}
+
 protected:
 private:
 	vector<vector<Case*>> cases;
 	ImpalaJones* impalaJones;
-	vector<int> impalaPositions;
+	string impalaPositions[22] = {"C0","C1","C2","C3","C4","C5","L0","L1","L2","L3","L4","C5","C4","C3","C2","C1","C0","L4","L3","L2","L1","L0"};
 };
 
 vector<vector<Case*>> Plateau::CONFIGURATIONDUPRESIDENT = Plateau::getConfigurationDuPresident();
