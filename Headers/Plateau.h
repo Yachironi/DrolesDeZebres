@@ -138,5 +138,3 @@ vector<vector<Case*>> Plateau::CONFIGURATIONDUPRESIDENT = Plateau::getConfigurat
 vector<vector<Case*>> Plateau::CONFIGURATIONSTANDARD = Plateau::getConfigurationStandard();
 
 #endif
-
->>>>>>> branch 'master' of https://github.com/Yachironi/DrolesDeZebres
