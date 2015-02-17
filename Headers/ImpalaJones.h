@@ -19,9 +19,9 @@ public:
 
 	int* getPosition()  {
 		//TODO (2,-1,-1)
-		int* a= new int[3];
+		int* positionsPossible= new int[3];
 
-		return a;
+		return positionsPossible;
 	}
 
 	void setPosition(int position) {
