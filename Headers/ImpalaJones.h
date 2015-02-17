@@ -17,7 +17,14 @@ public:
 	}
 	~ImpalaJones(){}
 
-	int* getPosition()  {
+	bool isPositionPossibleExist(){
+		if((getPositionPossible()[0])==-1&&(getPositionPossible()[0]==-1)&&(getPositionPossible()[0]==-1)){
+			return false;
+		}else{
+			return true;
+		}
+	}
+	int* getPositionPossible()  {
 		//TODO (2,-1,-1)
 		int* positionsPossible= new int[3];
 
@@ -28,6 +35,9 @@ public:
 		this->position = position;
 	}
 
+	int getPosition() const {
+		return position;
+	}
 
 protected:
 private:
