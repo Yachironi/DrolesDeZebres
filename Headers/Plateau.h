@@ -20,7 +20,7 @@ using namespace std;
 class Plateau {
 public:
 	static vector<vector<Case*>> CONFIGURATIONDUPRESIDENT;
-	static vector<vector<Case*>> CONFIGURATIONSTANDARD;
+	static vector<vector<Case*>> CONFIGURATIONSTANDARD; // configuration 0
 	static int configuration ;
 	static vector<vector<Case*>> getConfigurationDuPresident(){
 		// TODO Verification de la configuration
