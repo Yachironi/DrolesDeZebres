@@ -20,8 +20,6 @@ enum TypeJeux {
 int main(int argc, char **argv) {
 	//Plateau plateau(Plateau::CONFIGURATIONSTANDARD);
 
-	//plateau.afficher();
-
 	map<char, int> impalaPositions;
 	Partie* partie = JeuxFabrique::init();
 	partie->start();
