@@ -240,7 +240,7 @@ protected:
 private:
 	vector<vector<Case*>> cases;
 	ImpalaJones* impalaJones;
-	map<char, int> impalaPositions;
+	vector<int> impalaPositions;
 };
 
 vector<vector<Case*>> Plateau::CONFIGURATIONDUPRESIDENT = Plateau::getConfigurationDuPresident();
