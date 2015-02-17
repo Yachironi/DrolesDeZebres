@@ -16,6 +16,15 @@ public:
 		this->position=-1;
 	}
 	~ImpalaJones(){}
+
+	int getPosition() const {
+		return position;
+	}
+
+	void setPosition(int position) {
+		this->position = position;
+	}
+
 protected:
 private:
 	int position;

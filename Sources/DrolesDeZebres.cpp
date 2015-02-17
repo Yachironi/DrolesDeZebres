@@ -18,19 +18,16 @@ enum TypeJeux {
 	chargerPartie = 0, nouvellePartie = 1
 };
 int main(int argc, char **argv) {
-	Plateau plateau(Plateau::CONFIGURATIONSTANDARD);
-	Pion* pion = new Zebre();
-	pion->setCache(true);
-	plateau.setCases(0,0,pion);
+	//Plateau plateau(Plateau::CONFIGURATIONSTANDARD);
+
 	//plateau.afficher();
-	cout << plateau << endl;
 
 	map<char, int> impalaPositions;
 	Partie* partie = JeuxFabrique::init();
 	partie->start();
 	/*Elephant* elephant = new Elephant();
 	cout<<*elephant<<endl;*/
-	cout << "cases[0][0] = " << plateau.getCases()[0][0]->getIdSecteur()
-			<< endl;
+	/*cout << "cases[0][0] = " << plateau.getCases()[0][0]->getIdSecteur()
+			<< endl;*/
 	//cout << "cases[0][0] = "<<conf[1][1].getIdSecteur()<<endl;
 }

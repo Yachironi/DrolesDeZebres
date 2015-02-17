@@ -9,8 +9,12 @@
 #if !defined(__ImpalaJones_JeuxFabrique_h)
 #define __ImpalaJones_JeuxFabrique_h
 
+
+
 #include <vector>
 
+#include "Humain.h"
+#include "ImpalaJones.h"
 #include "Partie.h"
 #include "Plateau.h"
 
@@ -112,10 +116,10 @@ Partie* JeuxFabrique::initMultijoueur() {
 	string pseudo;
 	cout<<"Veuillez saisir le pseudo du premier joueur : ";
 	cin>>pseudo;
-	joueurs.push_back(new Joueur(pseudo));
+	joueurs.push_back(new Humain(pseudo));
 	cout<<"Veuillez saisir le pseudo du deuxieme joueur : ";
 	cin>>pseudo;
-	joueurs.push_back(new Joueur(pseudo));
+	joueurs.push_back(new Humain(pseudo));
 	partieFabrique = new Partie(plateau,impalaJones,joueurs);
 	return partieFabrique;
 }
