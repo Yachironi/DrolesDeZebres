@@ -27,6 +27,16 @@ public:
 	int getIdSecteur() const {
 		return idSecteur;
 	}
+	friend ostream& operator<<(ostream& os, const Case& cas) {
+		if(cas.pion==NULL){
+			 os << "NULL" ;
+		}else if(cas.pion->isCache()){
+			 os << "#" ;
+		}else{
+			os << cas.pion->getIntitulePion();
+		}
+		return os;
+	}
 
 protected:
 private:

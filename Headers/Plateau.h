@@ -21,7 +21,7 @@ class Plateau {
 public:
 	static vector<vector<Case*>> CONFIGURATIONDUPRESIDENT;
 	static vector<vector<Case*>> CONFIGURATIONSTANDARD;
-
+	static int configuration ;
 	static vector<vector<Case*>> getConfigurationDuPresident(){
 		// TODO Verification de la configuration
 		vector<vector<Case*>> configurationDuPresident = {
@@ -31,6 +31,7 @@ public:
 			{ new Case(1), new Case(1), new Case(2), new Case(4), new Case(4), new Case(3) },
 			{ new Case(2), new Case(2), new Case(2), new Case(2), new Case(4), new Case(3) }
 		};
+		configuration=1;
 		return configurationDuPresident;
 	}
 
@@ -43,6 +44,7 @@ public:
 			{ new Case(1), new Case(0), new Case(2), new Case(2), new Case(2), new Case(4) },
 			{ new Case(1), new Case(1), new Case(4), new Case(4), new Case(4), new Case(4) }
 		};
+		configuration=0;
 		return configurationStandard;
 	}
 
@@ -58,6 +60,11 @@ public:
 	void setCases(const vector<vector<Case*> >& cases) {
 		this->cases = cases;
 	}
+	friend ostream& operator<<(ostream& os, const Plateau& plateau) {
+		os<<plateau.cases[0][0]<<endl;
+		os<<"tableau"<<endl;
+			return os;
+		}
 /*
 	void afficher() {
 		//char c[9][11];
@@ -136,5 +143,5 @@ private:
 
 vector<vector<Case*>> Plateau::CONFIGURATIONDUPRESIDENT = Plateau::getConfigurationDuPresident();
 vector<vector<Case*>> Plateau::CONFIGURATIONSTANDARD = Plateau::getConfigurationStandard();
-
+int Plateau::configuration;
 #endif
