@@ -19,6 +19,12 @@ enum TypeJeux {
 };
 int main(int argc, char **argv) {
 	Plateau plateau(Plateau::CONFIGURATIONSTANDARD);
+	Pion* pion = new Zebre();
+	pion->setCache(true);
+	plateau.setCases(0,0,pion);
+	//plateau.afficher();
+	cout << plateau << endl;
+
 	map<char, int> impalaPositions;
 	Partie* partie = JeuxFabrique::init();
 	partie->start();
