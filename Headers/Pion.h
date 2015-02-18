@@ -52,10 +52,6 @@ public:
 	int getValeur() const {
 		return valeur;
 	}
-	friend ostream& operator<<(ostream& os, const Pion& pion) {
-		pion.isCache() ? os << "#" : os << pion.intitulePion;
-				return os;
-			}
 
 	const string& getIntitulePion() const {
 		return intitulePion;

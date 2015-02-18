@@ -26,61 +26,98 @@ class Partie {
 public:
 
 	Partie(Plateau* plateau, ImpalaJones* impalaJones, vector<Joueur*> joueurs) :
-				plateau(plateau), joueurs(joueurs) {
-			this->impalaJones= new ImpalaJones();
-			this->plateau->getImpalaJones()->setPosition(impalaJones->getPosition());
-		}
+			plateau(plateau), joueurs(joueurs) {
+		//this->plateau->getImpalaJones() = new ImpalaJones();
+		this->plateau->getImpalaJones()->setPosition(
+				impalaJones->getPosition());
+	}
 	~Partie() {
 
 	}
 	/*
 	 * Le jeux se deroule principalement ici
 	 * */
-/*
-#############
-# 1 # 2   2 #
-# 1 #####   #
-# 1   1 # 2 #
-# 1   1 # 2 #
-#############
-*/
+	/*
+	 #############
+	 # 1 # 2   2 #
+	 # 1 #####   #
+	 # 1   1 # 2 #
+	 # 1   1 # 2 #
+	 #############
+	 */
 	void start() {
 		cout << "Partie.start() : Jeux Commencé !!!" << endl;
-			    //copy(inauguration.begin(), inauguration.end(), ostream_iterator<int>(cout, " "));
+		//copy(inauguration.begin(), inauguration.end(), ostream_iterator<int>(cout, " "));
 
-				Pion* pionJoueur1 = new Zebre(0);
-				Pion* pionJoueur2 = new Zebre(1);
-				plateau->setCases(2, 1, pionJoueur1);
-				plateau->setCases(3, 1, pionJoueur1);
-				plateau->setCases(0, 0, pionJoueur1);
-				plateau->setCases(1, 0, pionJoueur2);
-				plateau->setCases(2, 0, pionJoueur2);
+		Pion* pionJoueur1 = new Zebre(0);
+		Pion* pionJoueur2 = new Zebre(1);
+		plateau->setCases(0, 1, pionJoueur1);
+		plateau->setCases(1, 1, pionJoueur1);
+		plateau->setCases(2, 1, pionJoueur1);
+		plateau->setCases(3, 1, pionJoueur2);
+		plateau->setCases(4, 1, pionJoueur2);
 
-				plateau->setCases(0, 2, pionJoueur2);
-				plateau->setCases(0, 3, pionJoueur2);
-				plateau->setCases(0, 4, pionJoueur2);
-				plateau->setCases(1, 3, pionJoueur1);
+		/*plateau->setCases(0, 2, pionJoueur2);
+		plateau->setCases(1, 2, pionJoueur2);
+		plateau->setCases(2, 2, pionJoueur2);
+		plateau->setCases(3, 2, pionJoueur1);
+		plateau->setCases(4, 2, pionJoueur1);
 
-				cout << *plateau;
-				plateau->getImpalaJones()==NULL?cout<<"impala est NULL":cout<<"impala est  NON NULL";
-				plateau->getImpalaJones()->setPosition(0);
+		plateau->setCases(0, 3, pionJoueur2);
+		plateau->setCases(1, 3, pionJoueur2);
+		plateau->setCases(2, 3, pionJoueur2);
+		plateau->setCases(3, 3, pionJoueur1);
+		plateau->setCases(4, 3, pionJoueur1);
 
-				joueurs[0]->jouer(plateau, impalaJones);
-				/*while (impalaJones->isPositionPossibleExist()) {
-				 joueurs[0]->jouer(plateau, impalaJones);
-				 if (impalaJones->isPositionPossibleExist()) {
-				 joueurs[1]->jouer(plateau, impalaJones);
-				 } else {
-				 break;
-				 }
-				 }*/
+		plateau->setCases(0, 4, pionJoueur2);
+		plateau->setCases(1, 4, pionJoueur2);
+		plateau->setCases(2, 4, pionJoueur2);
+		plateau->setCases(3, 4, pionJoueur1);
+		plateau->setCases(4, 4, pionJoueur1);
 
-				Joueur* gagnant = getGagnant();
-				//Joueur* gagnant = getGagnantByIdSecteur(0);
-				cout<<joueurs[0]->getPseudo() <<" = "<<joueurs[0]->getScore()<<" VS "<<joueurs[1]->getPseudo() <<" = "<<joueurs[1]->getScore()<<endl;
-				cout << "Le gagnant est : " << gagnant->getPseudo()<<endl;
+		plateau->setCases(0, 5, pionJoueur2);
+		plateau->setCases(1, 5, pionJoueur2);
+		plateau->setCases(2, 5, pionJoueur2);
+		plateau->setCases(3, 5, pionJoueur1);
+		plateau->setCases(4, 5, pionJoueur1);
 
+		plateau->setCases(1, 0, pionJoueur2);
+		plateau->setCases(2, 0, pionJoueur2);
+		plateau->setCases(3, 0, pionJoueur1);
+		plateau->setCases(4, 0, pionJoueur1);*/
+		cout << *plateau;
+		/*plateau->getImpalaJones() == NULL ?
+				cout << "impala est NULL" : cout << "impala est  NON NULL";*/
+		plateau->getImpalaJones()->setPosition(0);
+		//joueurs[0]->jouer(plateau, impalaJones);
+		int* positionImpalaPossible = plateau->getImpalaJones()->getPositionPossible(plateau);
+		while (!isFinJeux(positionImpalaPossible)) {
+			joueurs[0]->jouer(plateau, plateau->getImpalaJones());
+			positionImpalaPossible =
+					plateau->getImpalaJones()->getPositionPossible(plateau);
+			if (!isFinJeux(positionImpalaPossible)) {
+				joueurs[1]->jouer(plateau, plateau->getImpalaJones());
+			} else {
+				break;
+			}
 		}
+
+		Joueur* gagnant = getGagnant();
+		//Joueur* gagnant = getGagnantByIdSecteur(0);
+		cout << joueurs[0]->getPseudo() << " = " << joueurs[0]->getScore()
+				<< " VS " << joueurs[1]->getPseudo() << " = "
+				<< joueurs[1]->getScore() << endl;
+		cout << "Le gagnant est : " << gagnant->getPseudo() << endl;
+
+	}
+	bool isFinJeux(int *positionImpalaPossible) {
+		if (positionImpalaPossible[0] == -1 && positionImpalaPossible[1] == -1
+				&& positionImpalaPossible[2] == -1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	Joueur* getGagnant() {
 		/* On a que 6 secteurs*/
@@ -89,14 +126,17 @@ public:
 		for (idSecteur = 0; idSecteur < 6; idSecteur++) {
 			Joueur* gagnant = getGagnantByIdSecteur(idSecteur);
 			/* Ajout de Points d'inauguration */
-			if(find(gagnant->getInauguration().begin(),gagnant->getInauguration().end(),idSecteur)!=gagnant->getInauguration().end()){
-			gagnant->setScore(gagnant->getScore()+ 5);
+			if (find(gagnant->getInauguration().begin(),
+					gagnant->getInauguration().end(), idSecteur)
+					!= gagnant->getInauguration().end()) {
+				gagnant->setScore(gagnant->getScore() + 5);
 			}
 			/* Parcour du plateau pour calculer le score final sur le secteur */
 			for (unsigned int i = 0; i < plateau->getCases().size(); i++) {
-				for (unsigned int j = 0; j < plateau->getCases()[0].size(); j++) {
-					if ((plateau->getCases()[i][j]->getIdSecteur()
-							== idSecteur)&&(plateau->getCases()[i][j]->pion!=NULL)) {
+				for (unsigned int j = 0; j < plateau->getCases()[0].size();
+						j++) {
+					if ((plateau->getCases()[i][j]->getIdSecteur() == idSecteur)
+							&& (plateau->getCases()[i][j]->pion != NULL)) {
 						if (!plateau->getCases()[i][j]->pion->isCache()) {
 							gagnant->setScore(
 									gagnant->getScore()
@@ -144,7 +184,7 @@ public:
 protected:
 private:
 	Plateau* plateau;
-	ImpalaJones* impalaJones;
+	int tour=-1;
 	vector<Joueur*> joueurs;
 };
 
