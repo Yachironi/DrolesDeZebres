@@ -109,19 +109,23 @@ Partie* JeuxFabrique::initJeuxSauvgarde() {
 
 Partie* JeuxFabrique::initMultijoueur() {
 	Partie* partieFabrique;
-	cout << "Jeux Multjoureur :" << endl;
-	Plateau* plateau = new Plateau(Plateau::CONFIGURATIONSTANDARD);
-	ImpalaJones* impalaJones = new ImpalaJones();
-	vector<Joueur*> joueurs;
-	string pseudo;
-	cout<<"Veuillez saisir le pseudo du premier joueur : ";
-	cin>>pseudo;
-	joueurs.push_back(new Humain(pseudo));
-	cout<<"Veuillez saisir le pseudo du deuxieme joueur : ";
-	cin>>pseudo;
-	joueurs.push_back(new Humain(pseudo));
-	partieFabrique = new Partie(plateau,impalaJones,joueurs);
-	return partieFabrique;
+		cout << "Jeux Multjoureur :" << endl;
+		Plateau* plateau = new Plateau(Plateau::CONFIGURATIONSTANDARD);
+		ImpalaJones* impalaJones = new ImpalaJones();
+		vector<Joueur*> joueurs;
+		string pseudo;
+		cout<<"Veuillez saisir le pseudo du premier joueur : ";
+		cin>>pseudo;
+		joueurs.push_back(new Humain(pseudo));
+		cout<<"Veuillez saisir le pseudo du deuxieme joueur : ";
+		cin>>pseudo;
+
+		joueurs.push_back(new Humain(pseudo));
+
+		partieFabrique = new Partie(plateau,impalaJones,joueurs);
+		cout<<"==> ICI <==="<<endl;
+
+		return partieFabrique;
 }
 Partie* JeuxFabrique::initContrePC() {
 	Partie* partieFabrique = NULL;
