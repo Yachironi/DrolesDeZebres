@@ -268,10 +268,11 @@ int ImpalaJones::getPosition() const {
 	return position;
 }
 bool ImpalaJones::mouvementEstPossible(int i, int j) {
+	cout<<"==> mouvementEstPossible <=="<<endl;
 	cout << "Position Impala Jones = " << position << endl;
-	if ((position <= 0 && position <= 5)) {
-		cout<<"==> TRUUUUUUUUUUUUUUUUUUUUUU <=="<<endl;
-
+	cout<<"[i,j] = "<<i<<" , "<<j<<endl;
+	if ((position >= 0 && position <= 5)) {
+		cout<<"entree 1 "<<endl;
 		if ((j == position)) {
 
 			return true;
@@ -280,6 +281,8 @@ bool ImpalaJones::mouvementEstPossible(int i, int j) {
 			return false;
 		}
 	} else if (position <= 16 && position >= 11) {
+		cout<<"entree 2 "<<endl;
+
 		if ((j == 16 - position))
 			return true;
 		else {
@@ -287,6 +290,7 @@ bool ImpalaJones::mouvementEstPossible(int i, int j) {
 			return false;
 		}
 	} else if (position >= 6 && position <= 10) {
+		cout<<"entree 3 "<<endl;
 		if ((i == 6 - position))
 			return true;
 		else {
@@ -294,6 +298,8 @@ bool ImpalaJones::mouvementEstPossible(int i, int j) {
 			return false;
 		}
 	} else if (position >= 6 && position <= 10) {
+		cout<<"entree 4 "<<endl;
+
 		if ((i == 21 - position))
 			return true;
 		else {
@@ -301,5 +307,6 @@ bool ImpalaJones::mouvementEstPossible(int i, int j) {
 			return false;
 		}
 	}
+	cout<<"Condition on Controler !!! "<<endl;
 	return false;
 }
