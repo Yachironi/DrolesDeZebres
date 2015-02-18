@@ -157,26 +157,49 @@ public:
 							for (int i = 0; i < 5; i++){
 								for (int j = 0; j < 6; j++){
 									if (plateau.cases[i][j]->pion == NULL){
-										c[2 * i + 2][5 * j + 3] = "0(0)";
+										c[2 * i + 2][5 * j + 3] = "    ";
 
 									}
 									else if(plateau.cases[i][j]->pion->isCache()){
-										c[2 * i + 2][5 * j + 3] = "#(0)";
+										c[2 * i + 2][5 * j + 3] = "####";
 									}
-									//TODO change!!!
 									else {
-										string pionType = plateau.cases[i][j]->pion->getIntitulePion();
-										//Le Zebre
-										if (pionType == "Zebre") c[2 * i + 2][5 * j + 3] = "--Z-";
-										//La Gazelle
-										else if (pionType == "Gazelle") c[2 * i + 2][5 * j + 3] = 'G';
-										//Le Lion
-										else if (pionType == "Lion") c[2 * i + 2][5 * j + 3] = 'L';
-										//L'Elephant
-										else if (pionType == "Elephant") c[2 * i + 2][5 * j + 3] = 'L';
-										//Le Crocodile
-										else if (pionType == "Elephant") c[2 * i + 2][5 * j + 3] = '0';
-									}
+					string pionType =
+							plateau.cases[i][j]->pion->getIntitulePion();
+					//TODO utilise pusedo
+					string pionNom = to_string(
+							plateau.cases[i][j]->pion->getIdJoueur());
+					//Le Zebre
+					if (pionType == "Zebre") {
+						string affichage = "Z( )";
+						affichage[2] = pionNom[0];
+						c[2 * i + 2][5 * j + 3] = affichage;
+					}
+					//La Gazelle
+					else if (pionType == "Gazelle") {
+						string affichage = "G( )";
+						affichage[2] = pionNom[0];
+						c[2 * i + 2][5 * j + 3] = affichage;
+					}
+					//Le Lion
+					else if (pionType == "Lion") {
+						string affichage = "L( )";
+						affichage[2] = pionNom[0];
+						c[2 * i + 2][5 * j + 3] = affichage;
+					}
+					//L'Elephant
+					else if (pionType == "Elephant") {
+						string affichage = "E( )";
+						affichage[2] = pionNom[0];
+						c[2 * i + 2][5 * j + 3] = affichage;
+					}
+					//Le Crocodile
+					else if (pionType == "Crocodile") {
+						string affichage = "C( )";
+						affichage[2] = pionNom[0];
+						c[2 * i + 2][5 * j + 3] = affichage;
+					}
+				}
 								}
 							}
 
