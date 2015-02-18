@@ -58,6 +58,7 @@ void Joueur::jouer(Plateau* plateau, ImpalaJones* impalaJones) {
 		cin >> pionAdeposer;
 	}
 	pionAdeposer--;
+cout<<"SIZE OF PIONS[pionAdeposer] = "<<pions[pionAdeposer].size()<<endl;
 	plateau->getCases()[i][j]->pion = pions[pionAdeposer].front();
 	pions[pionAdeposer].erase(pions[pionAdeposer].begin());
 	//getPionsRestants();
@@ -90,9 +91,9 @@ bool Joueur::isFinJeux(int *positionImpalaPossible) {
 }
 
 bool Joueur::isPionTypeEstDisponnible(int pionAdeposer) {
-
+cout<<""<<endl;
 	if ((pionAdeposer > 0 && pionAdeposer < 6)) {
-		if (pions[pionAdeposer].size() > 0) {
+		if (pions[pionAdeposer-1].size() > 0) {
 			return true;
 		} else {
 			cout << "Ce type n\'existe plus" << endl;

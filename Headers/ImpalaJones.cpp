@@ -282,7 +282,6 @@ bool ImpalaJones::mouvementEstPossible(int i, int j) {
 		}
 	} else if (position <= 16 && position >= 11) {
 		cout<<"entree 2 "<<endl;
-
 		if ((j == 16 - position))
 			return true;
 		else {
@@ -291,13 +290,13 @@ bool ImpalaJones::mouvementEstPossible(int i, int j) {
 		}
 	} else if (position >= 6 && position <= 10) {
 		cout<<"entree 3 "<<endl;
-		if ((i == 6 - position))
+		if ((i == position-6))
 			return true;
 		else {
 			cout << "Position Invalide" << endl;
 			return false;
 		}
-	} else if (position >= 6 && position <= 10) {
+	} else if (position >= 17 && position <= 21) {
 		cout<<"entree 4 "<<endl;
 
 		if ((i == 21 - position))
