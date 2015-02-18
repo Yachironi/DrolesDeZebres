@@ -248,6 +248,8 @@ public:
 						positionsPossible[2] = -1;
 					}
 				}
+			nbLigneColum++;
+			nbBoucle++;
 			}
 		}
 
