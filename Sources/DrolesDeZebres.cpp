@@ -14,6 +14,7 @@
 #include "../Headers/Plateau.h"
 #include "../Headers/ImpalaJones.h"
 
+/* test */
 using namespace std;
 enum TypeJeux {
 	chargerPartie = 0, nouvellePartie = 1
