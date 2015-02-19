@@ -101,6 +101,7 @@ int Plateau::saisirImpalaJonesPosition() {
 
 		int* positionImpalaPossible =
 				this->getImpalaJones()->getPositionPossible(this);
+
 		cout << "Veuillez choisir la position de ImpalaJones :" << endl;
 		cout << getImpalaJonesPossibleString();
 		cin >> positionImpalaJones;

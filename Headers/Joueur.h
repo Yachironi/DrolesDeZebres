@@ -13,6 +13,8 @@
 
 #include "Pion.h"
 
+class Partie;
+
 class ImpalaJones;
 class Plateau;
 
@@ -24,7 +26,7 @@ class Joueur {
 	static int id;
 public:
 	Joueur(string pseudo);
-	void jouer(Plateau* plateau, ImpalaJones* impalaJones);
+	void jouer(Plateau* plateau, Partie* partie);
 	bool isPionTypeEstDisponnible(int pionAdeposer);
 	void getPionsRestants();
 	int getIdJoueur() const;
@@ -40,7 +42,7 @@ public:
 	virtual int* gettacticPositionPionAdeposer(Plateau* plateau);
 	virtual int gettacticTypePionAdeposer();
 	void setPionsRestant(int nbG, int nbZ, int nbE, int nbL, int nbC);
-
+	void inaugurationUpdate(int i, int j, Plateau* plateau, Partie* partie);
 	//string getImpalaJonesPossibleString(Plateau* plateau);
 	//bool isImpalaPositionDisponnible(int positionImpalaJones,int* positionImpalaPossible);
 	bool isFinJeux(int *positionImpalaPossible);

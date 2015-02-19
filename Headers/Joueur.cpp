@@ -15,6 +15,7 @@
 #include "Gazelle.h"
 #include "ImpalaJones.h"
 #include "Lion.h"
+#include "Partie.h"
 #include "Plateau.h"
 #include "Zebre.h"
 
@@ -35,16 +36,17 @@ Joueur::Joueur(string pseudo) :
 }
 /*Joueur::~Joueur(){
 
-}*/
+ }*/
 
-
-void Joueur::jouer(Plateau* plateau, ImpalaJones* impalaJones) {
+void Joueur::jouer(Plateau* plateau, Partie* partie) {
 	cout << "### DEB ### Tour de ===>   " << pseudo << "   <===" << endl;
 	int i = -1, j = -1;
 	if (plateau->getImpalaJones()->getPosition() == -1) {
 		cout << *plateau << endl;
 		int positionImpalaJones = gettacticImpalaJonesPosition(plateau);
 		plateau->getImpalaJones()->setPosition(positionImpalaJones);
+		cout << *plateau << endl;
+
 	} else {
 		cout << *plateau << endl;
 		cout << "Position  ImpalaJones = "
@@ -63,16 +65,65 @@ void Joueur::jouer(Plateau* plateau, ImpalaJones* impalaJones) {
 		plateau->getCases()[i][j]->pion = pions[pionAdeposer].front();
 		pions[pionAdeposer].erase(pions[pionAdeposer].begin());
 
+		plateau->updateSelonReglesDeJeux(i, j);
+		if (!partie->isIsInnaugure())
+			inaugurationUpdate(i, j, plateau, partie);
+
 		/* Saisie de position de ImpalaJones */
 		//int positionImpalaJones = plateau->saisirImpalaJonesPosition();
-		int positionImpalaJones = gettacticImpalaJonesPosition(plateau);
-		plateau->getImpalaJones()->setPosition(positionImpalaJones);
-		plateau->updateSelonReglesDeJeux(i, j);
+		int* positionImpalaPossible =
+				plateau->getImpalaJones()->getPositionPossible(plateau);
+		if (!isFinJeux(positionImpalaPossible)) {
+			int positionImpalaJones = gettacticImpalaJonesPosition(plateau);
+			plateau->getImpalaJones()->setPosition(positionImpalaJones);
+		}
+		cout << *plateau << endl;
+
 	}
 	cout << "\n### FIN ### Tour de ===>   " << pseudo << "   <===\n" << endl;
 
 }
+void Joueur::inaugurationUpdate(int x, int y, Plateau* plateau,
+		Partie* partie) {
+	int idSecteur = -1;
+	int nbrPionsJoueurId1 = 0, nbrPionsJoueurId2 = 0;
+	bool innauguration = true;
+	idSecteur = plateau->getCases()[x][y]->getIdSecteur();
+	for (unsigned int i = 0; i < plateau->getCases().size(); i++) {
+		for (unsigned int j = 0; j < plateau->getCases()[0].size(); j++) {
+			if (plateau->getCases()[i][j]->getIdSecteur()
+					== idSecteur&&plateau->getCases()[i][j]->pion==NULL) {
+				innauguration = false;
+				break;
+			}
 
+			int idSecteurTMP = plateau->getCases()[i][j]->getIdSecteur();
+			if ((idSecteur == idSecteurTMP)
+					&& (plateau->getCases()[i][j]->pion != NULL)) {
+				int idJoeurTMP = plateau->getCases()[i][j]->pion->getIdJoueur();
+				if (idJoeurTMP == 0) {
+					nbrPionsJoueurId1++;
+				} else if (idJoeurTMP == 1) {
+					nbrPionsJoueurId2++;
+				}
+			}
+		}
+	}
+	if (innauguration) {
+		if (nbrPionsJoueurId1 > nbrPionsJoueurId2) {
+
+			if (nbrPionsJoueurId1 == idJoueur) {
+				score = 5;
+				partie->setIsInnaugure(true);
+			}
+		} else {
+			if (nbrPionsJoueurId2 == idJoueur) {
+				score = 5;
+				partie->setIsInnaugure(true);
+			}
+		}
+	}
+}
 int Joueur::saisirPionAdeposer() {
 	int pionAdeposer = -1;
 	cout << "Veuillez choisir le pion à deposer :" << endl;
@@ -160,8 +211,15 @@ void Joueur::setScore(int score) {
 	this->score = score;
 }
 
-int Joueur::gettacticImpalaJonesPosition(Plateau* plateau){return -1;}
-int* Joueur::gettacticPositionPionAdeposer(Plateau* plateau){return NULL;}
-int Joueur::gettacticTypePionAdeposer(){return -1;};
+int Joueur::gettacticImpalaJonesPosition(Plateau* plateau) {
+	return -1;
+}
+int* Joueur::gettacticPositionPionAdeposer(Plateau* plateau) {
+	return NULL;
+}
+int Joueur::gettacticTypePionAdeposer() {
+	return -1;
+}
+;
 
 int Joueur::id = 0;
