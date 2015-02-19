@@ -15,12 +15,12 @@
 
 int Ordinateur::gettacticImpalaJonesPosition(Plateau* plateau) {
 	int positionImpalaJones = -1;
-	cout<<"==> ICI <=="<<endl;
+	//cout<<"==> ICI <=="<<endl;
 	/* Intelligence Artificiel */
 	int* impalaPossiblePosition = plateau->getImpalaJones()->getPositionPossible(plateau);
 	if (plateau->getImpalaJones()->getPosition() == -1) {
 		positionImpalaJones = rand() % 22;
-		cout<<"==> F ICI 1 <=="<<endl;
+		//cout<<"==> F ICI 1 <=="<<endl;
 
 		return positionImpalaJones;
 	} else {
@@ -31,14 +31,14 @@ int Ordinateur::gettacticImpalaJonesPosition(Plateau* plateau) {
 		while (positions[positionImpalaJones] < 0) {
 			positionImpalaJones = rand() % 3;
 		}
-		cout<<"==> F ICI 2 <=="<<endl;
+		//cout<<"==> F ICI 2 <=="<<endl;
 		return impalaPossiblePosition[positionImpalaJones];
 
 	}
 
 }
 int* Ordinateur::gettacticPositionPionAdeposer(Plateau* plateau) {
-	cout << "TACTIC ORDINATEUR PositionPionAdeposer : " << endl;
+	//cout << "TACTIC ORDINATEUR PositionPionAdeposer : " << endl;
 
 	int* positionPionAdeposer = new int[2];
 	int position = plateau->getImpalaJones()->getPosition();
@@ -83,7 +83,7 @@ int* Ordinateur::gettacticPositionPionAdeposer(Plateau* plateau) {
 }
 
 int Ordinateur::gettacticTypePionAdeposer() {
-	cout << "TACTIC ORDINATEUR TYPE PION : " << endl;
+	//cout << "TACTIC ORDINATEUR TYPE PION : " << endl;
 	int pionAdeposer = -1;
 	pionAdeposer = rand() % 5;
 	while (!isPionTypeEstDisponnible(pionAdeposer)) {

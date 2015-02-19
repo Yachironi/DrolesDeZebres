@@ -68,7 +68,7 @@ bool Plateau::estPossible(int i, int j) {
 	int lignes = cases.size();
 	int colonnes = cases[0].size();
 	if ((i > -1) && (i < lignes) && (j > -1) && (j < colonnes)) {
-		cout << i << " , " << j << endl;
+		//cout << i << " , " << j << endl;
 		if (cases[i][j]->pion == NULL) {
 			return impalaJones->mouvementEstPossible(i, j);
 		} else {
@@ -200,7 +200,7 @@ void Plateau::updateEFFRAYANT(int i, int j) {
 				if (typeAnimal == EFFRAYE) {
 					cout << "x,y = " << x << " ," << y << endl;
 
-					cout << "EFFRAYE !!! " << endl;
+					//cout << "EFFRAYE !!! " << endl;
 					cases[x][y]->pion->setCache(true);
 				}
 			}
@@ -213,8 +213,8 @@ void Plateau::updateEFFRAYE(int i, int j) {
 	int listePionAtester[4][2] = { { i, j - 1 }, { i - 1, j }, { i, j + 1 }, { i
 			+ 1, j } };
 	int x, y;
-	cout<<"EFFRAYE APPEL"<<endl;
-	cout << "i,j = " << i << " ," << j << endl;
+	//cout<<"EFFRAYE APPEL"<<endl;
+	//cout << "i,j = " << i << " ," << j << endl;
 	for (unsigned int c = 0; c < 4; c++) {
 		x = listePionAtester[c][0];
 		y = listePionAtester[c][1];
@@ -252,7 +252,7 @@ void Plateau::updateSAUTEUR(int i, int j) {
 						choix[0]=x;
 						choix[1]=y;
 						choixDeSaute.push_back(choix);
-						cout << "x,y = " << x << " ," << y << endl;
+						//cout << "x,y = " << x << " ," << y << endl;
 					}
 				}
 			}
@@ -267,10 +267,10 @@ void Plateau::updateSAUTEUR(int i, int j) {
 			cout<<"]"<<endl;
 			int choix=-1;
 			cin>>choix;
-			cout<<"choix="<<choix<<endl;
+			//cout<<"choix="<<choix<<endl;
 			while((choix-1)<0||(choix-1)>choixDeSaute.size()){
 				cin>>choix;
-				cout<<"choix REPETE ="<<endl;
+				//cout<<"choix REPETE ="<<endl;
 			}
 			if((choix)>1){
 				Pion* pionTMP;
@@ -282,3 +282,203 @@ void Plateau::updateSAUTEUR(int i, int j) {
 			}
 		}
 }
+
+
+ostream& operator<<(ostream& os, const Plateau& plateau) {
+		string c[17][40];
+		for (int i = 0; i < 5; i++) {
+			for (int j = 0; j < 5; j++) {
+				if (plateau.cases[i][j]->getIdSecteur()
+						!= plateau.cases[i][j + 1]->getIdSecteur()) {
+					c[2 * i + 4][5 * j + 10] = '|';
+				} else
+					c[2 * i + 4][5 * j + 10] = ' ';
+			}
+		}
+
+		for (int i = 0; i < 6; i++) {
+			for (int j = 0; j < 4; j++) {
+				c[2 * j + 5][5 * i + 5] = ' ';
+				if (plateau.cases[j][i]->getIdSecteur()
+						!= plateau.cases[j + 1][i]->getIdSecteur()) {
+					c[2 * j + 5][5 * i + 6] = "----";
+				} else
+					c[2 * j + 5][5 * i + 6] = "    ";
+			}
+		}
+
+		for (int i = 0; i < 5; i++) {
+			for (int j = 0; j < 6; j++) {
+				if (plateau.cases[i][j]->pion == NULL) {
+					c[2 * i + 4][5 * j + 6] = "    ";
+
+				} else if (plateau.cases[i][j]->pion->isCache()) {
+					c[2 * i + 4][5 * j + 6] = "####";
+				} else {
+					string pionType = plateau.cases[i][j]->pion->getIntitulePion();
+					string pionNom = to_string(
+							plateau.cases[i][j]->pion->getIdJoueur());
+					//Le Zebre
+					if (pionType == "Zebre") {
+						string affichage = "Z( )";
+						affichage[2] = pionNom[0];
+						c[2 * i + 4][5 * j + 6] = affichage;
+					}
+					//La Gazelle
+					else if (pionType == "Gazelle") {
+						string affichage = "G( )";
+						affichage[2] = pionNom[0];
+						c[2 * i + 4][5 * j + 6] = affichage;
+					}
+					//Le Lion
+					else if (pionType == "Lion") {
+						string affichage = "L( )";
+						affichage[2] = pionNom[0];
+						c[2 * i + 4][5 * j + 6] = affichage;
+					}
+					//L'Elephant
+					else if (pionType == "Elephant") {
+						string affichage = "E( )";
+						affichage[2] = pionNom[0];
+						c[2 * i + 4][5 * j + 6] = affichage;
+					}
+					//Le Crocodile
+					else if (pionType == "Crocodile") {
+						string affichage = "C( )";
+						affichage[2] = pionNom[0];
+						c[2 * i + 4][5 * j + 6] = affichage;
+					}
+				}
+			}
+		}
+
+		//afficher la frontiere interieur
+		for (int i = 1; i < 11; i++) {
+			c[i+2][5] = '|';
+			c[i+2][35] = '|';
+		}
+		for (int i = 1; i < 31; i++) {
+			c[3][i + 4] = "-";
+			c[13][i + 4] = "-";
+		}
+		c[3][5] = '+';
+		c[3][35] = '+';
+		c[13][5] = '+';
+		c[13][35] = '+';
+
+		//afficher le chemin d'Impala Jones
+		c[2][3] = ' ';
+		c[2][37] = ' ';
+		c[14][3] = ' ';
+		c[14][37] = ' ';
+		for (int i = 1; i < 34; i++) {
+			c[2][i+3] = ' ';
+			c[14][i+3] = ' ';
+		}
+		for (int i = 1; i < 12; i++) {
+			c[i+2][3] = "  ";
+			c[i+2][36] = "  ";
+		}
+
+
+		c[2][7] = '0';
+		c[2][12] = '1';
+		c[2][17] = '2';
+		c[2][22] = '3';
+		c[2][27] = '4';
+		c[2][32] = '5';
+		c[4][36] = "6 ";
+		c[6][36] = "7 ";
+		c[8][36] = "8 ";
+		c[10][36] = "9 ";
+		c[12][36] = "10";
+		c[14][32] = '1';
+		c[14][33] = '1';
+		c[14][27] = '1';
+		c[14][28] = '2';
+		c[14][22] = '1';
+		c[14][23] = '3';
+		c[14][17] = '1';
+		c[14][18] = '4';
+		c[14][12] = '1';
+		c[14][13] = '5';
+		c[14][7] = '1';
+		c[14][8] = '6';
+		c[12][3] = "17";
+		c[10][3] = "18";
+		c[8][3] = "19";
+		c[6][3] = "20";
+		c[4][3] = "21";
+
+		//afficher la frontiere intermediaire
+		for (int i = 1; i < 14; i++) {
+			c[i+1][2] = '|';
+			c[i+1][38] = '|';
+		}
+		for (int i = 1; i < 36; i++) {
+			c[1][i+2] = "-";
+			c[15][i+2] = "-";
+		}
+		c[1][2] = '+';
+		c[1][38] = '+';
+		c[15][2] = '+';
+		c[15][38] = '+';
+
+		//afficher la coordonnee
+		for (int i = 0; i < 17; i++) {
+			c[i][0] = "  ";
+			c[i][39] = ' ';
+		}
+		for (int i = 1; i < 38; i++) {
+			c[0][i+1] = ' ';
+			c[16][i+1] = ' ';
+		}
+		c[0][0] = '\\';
+		c[0][3] = 'C';
+		c[1][0] = "L ";
+		c[0][8] = '0';
+		c[0][13] = '1';
+		c[0][18] = '2';
+		c[0][23] = '3';
+		c[0][28] = '4';
+		c[0][33] = '5';
+		c[4][0] = "0 ";
+		c[6][0] = "1 ";
+		c[8][0] = "2 ";
+		c[10][0] = "3 ";
+		c[12][0] = "4 ";
+
+		//afficher la position d'ImpalaJones
+		Plateau::afficherImpalaJones(plateau.impalaJones->getPosition(), c);
+
+		// afficher la table de char
+		for (int i = 0; i < 17; i++) {
+			os << endl;
+			for (int j = 0; j < 39; j++) {
+				os << c[i][j];
+			}
+		}
+		os << endl;
+		return os;
+	}
+
+void Plateau::afficherImpalaJones(int position, string cases[17][40]){
+			if((0 <=  position) && (position <= 21)){
+				if((0 <= position) && (position<= 5)){
+					cases[2][5*position+7] = 'X';
+				}
+				else if((6 <= position) && (position <= 9)){
+					cases[(position-6)*2 + 4][36] = "X ";
+				}
+				else if(position == 10){
+					cases[12][36] = "X ";
+				}
+				else if((11 <= position) && (position <= 16)){
+					cases[14][32-5*(position-11)] = 'X';
+					cases[14][33-5*(position-11)] = ' ';
+				}
+				else{
+					cases[12-2*(position-17)][3] = "X ";
+				}
+			}
+		}

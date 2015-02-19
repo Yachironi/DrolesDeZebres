@@ -59,23 +59,14 @@ void Joueur::jouer(Plateau* plateau, ImpalaJones* impalaJones) {
 		/* Saisie de type de pion */
 		int pionAdeposer = 0;
 		//pionAdeposer = saisirPionAdeposer();
-
-		cout<<"===> DEB TACTIC <==="<<endl;
 		pionAdeposer = gettacticTypePionAdeposer();
-		cout<<"===> FIN TACTIC <==="<<endl;
-		cout<<"===> DEB ICI <==="<<endl;
-		cout<<"pionAdeposer="<<pionAdeposer<<endl;
-		cout<<" pions[pionAdeposer].size= "<< pions[pionAdeposer].size();
 		plateau->getCases()[i][j]->pion = pions[pionAdeposer].front();
 		pions[pionAdeposer].erase(pions[pionAdeposer].begin());
-		cout<<"===> FIN ICI <==="<<endl;
+
 		/* Saisie de position de ImpalaJones */
 		//int positionImpalaJones = plateau->saisirImpalaJonesPosition();
 		int positionImpalaJones = gettacticImpalaJonesPosition(plateau);
-		cout << "AVANT positionImpalaJones=" << positionImpalaJones;
 		plateau->getImpalaJones()->setPosition(positionImpalaJones);
-		cout << "APRES positionImpalaJones="
-				<< plateau->getImpalaJones()->getPosition();
 		plateau->updateSelonReglesDeJeux(i, j);
 	}
 	cout << "\n### FIN ### Tour de ===>   " << pseudo << "   <===\n" << endl;
