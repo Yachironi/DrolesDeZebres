@@ -35,49 +35,54 @@ Joueur::Joueur(string pseudo) :
 }
 
 void Joueur::jouer(Plateau* plateau, ImpalaJones* impalaJones) {
-	cout << "Tour Joueur " << pseudo << endl;
+	cout << "### DEB ### Tour de ===>   " << pseudo <<"   <==="<< endl;
 	int i = -1, j = -1;
-	cout<<"=======> DEB SAISIE <======="<<endl;
-
-	cout << "Position  ImpalaJones = " << plateau->getImpalaJones()->getPosition()<< endl;
-	cout << "Veillez saisir votre movement [i,j]:" << endl;
-	cin >> i;
-	cin >> j;
-	while (!plateau->estPossible(i, j)) {
+	if (plateau->getImpalaJones()->getPosition() == -1) {
+		cout << *plateau << endl;
+		plateau->saisirImpalaJonesPosition();
+	} else {
+		cout << *plateau << endl;
+		cout << "Position  ImpalaJones = "
+				<< plateau->getImpalaJones()->getPosition() << endl;
 		cout << "Veillez saisir votre movement [i,j]:" << endl;
-		cin >> i;
-		cin >> j;
-	}
-	cout<<"=======> FIN SAISIE <======="<<endl;
-
-	int pionAdeposer = 0;
-	cout << "Veuillez choisir le pion à deposer :" << endl;
-	getPionsRestants();
-	cin >> pionAdeposer;
-	while (!isPionTypeEstDisponnible(pionAdeposer)) {
-		cin >> pionAdeposer;
-	}
-	pionAdeposer--;
-cout<<"SIZE OF PIONS[pionAdeposer] = "<<pions[pionAdeposer].size()<<endl;
-	plateau->getCases()[i][j]->pion = pions[pionAdeposer].front();
-	pions[pionAdeposer].erase(pions[pionAdeposer].begin());
-	//getPionsRestants();
-
-	int* positionImpalaPossible =plateau->getImpalaJones()->getPositionPossible(plateau);
-	int positionImpalaJones=-1;
-	if (!isFinJeux(positionImpalaPossible)) {
-		cout << "Veuillez choisir la position de ImpalaJones :" << endl;
-		cout << getImpalaJonesPossibleString(plateau);
-		cin >> positionImpalaJones;
-		while (!isImpalaPositionDisponnible(positionImpalaJones,
-				positionImpalaPossible)) {
-			cin >> positionImpalaJones;
+		cout<<"N° Ligne   = ";cin >> i;
+		cout<<"N° Colonne = ";cin >> j;
+		while (!plateau->estPossible(i, j)) {
+			cout << "Veillez saisir votre movement [i,j]:" << endl;
+			cin >> i;
+			cin >> j;
 		}
-		cout << "La Position choisit pour Impala est " << positionImpalaJones
-				<< endl;
-		plateau->getImpalaJones()->setPosition(positionImpalaJones);
+		int pionAdeposer = 0;
+		cout << "Veuillez choisir le pion à deposer :" << endl;
+		getPionsRestants();
+		cin >> pionAdeposer;
+		while (!isPionTypeEstDisponnible(pionAdeposer)) {
+			cin >> pionAdeposer;
+		}
+		pionAdeposer--;
+		//cout << "SIZE OF PIONS[pionAdeposer] = " << pions[pionAdeposer].size()<< endl;
+		plateau->getCases()[i][j]->pion = pions[pionAdeposer].front();
+		pions[pionAdeposer].erase(pions[pionAdeposer].begin());
+		//getPionsRestants();
+
+//		int* positionImpalaPossible =plateau->getImpalaJones()->getPositionPossible(plateau);
+//		int positionImpalaJones = -1;
+//		if (!isFinJeux(positionImpalaPossible)) {
+//			cout << "Veuillez choisir la position de ImpalaJones :" << endl;
+//			cout << getImpalaJonesPossibleString(plateau);
+//			cin >> positionImpalaJones;
+//			while (!isImpalaPositionDisponnible(positionImpalaJones,
+//					positionImpalaPossible)) {
+//				cin >> positionImpalaJones;
+//			}
+//			cout << "La Position choisit pour Impala est "
+//					<< positionImpalaJones << endl;
+//			plateau->getImpalaJones()->setPosition(positionImpalaJones);
+//		}
+		plateau->saisirImpalaJonesPosition();
+		plateau->updateSelonReglesDeJeux(i,j);
 	}
-	cout << *plateau << endl;
+	cout << "\n### FIN ### Tour de ===>   " << pseudo <<"   <===\n"<< endl;
 
 }
 
@@ -91,9 +96,9 @@ bool Joueur::isFinJeux(int *positionImpalaPossible) {
 }
 
 bool Joueur::isPionTypeEstDisponnible(int pionAdeposer) {
-cout<<""<<endl;
+	cout << "" << endl;
 	if ((pionAdeposer > 0 && pionAdeposer < 6)) {
-		if (pions[pionAdeposer-1].size() > 0) {
+		if (pions[pionAdeposer - 1].size() > 0) {
 			return true;
 		} else {
 			cout << "Ce type n\'existe plus" << endl;
@@ -104,38 +109,38 @@ cout<<""<<endl;
 		return false;
 	}
 }
-
-string Joueur::getImpalaJonesPossibleString(Plateau* plateau) {
-	int* positionImpalaPossible =
-			plateau->getImpalaJones()->getPositionPossible(plateau);
-	string res = "[ ";
-	if (positionImpalaPossible[0] >= 0) {
-		res = res + to_string(positionImpalaPossible[0]);
-	}
-	if (positionImpalaPossible[1] >= 0) {
-		res = res + " , " + to_string(positionImpalaPossible[1]);
-	}
-	if (positionImpalaPossible[2] >= 0) {
-		res = res + " , " + to_string(positionImpalaPossible[2]);
-	}
-	res += " ]";
-	return res;
-}
-
-bool Joueur::isImpalaPositionDisponnible(int positionImpalaJones,
-		int* positionImpalaPossible) {
-	if (positionImpalaJones >= 0) {
-		if (positionImpalaJones != positionImpalaPossible[0]
-				&& positionImpalaJones != positionImpalaPossible[1]
-				&& positionImpalaJones != positionImpalaPossible[2]) {
-			return false;
-		} else {
-			return true;
-		}
-	} else {
-		return false;
-	}
-}
+//
+//string Joueur::getImpalaJonesPossibleString(Plateau* plateau) {
+//	int* positionImpalaPossible =
+//			plateau->getImpalaJones()->getPositionPossible(plateau);
+//	string res = "[";
+//	if (positionImpalaPossible[0] >= 0) {
+//			res = res +"  "+ to_string(positionImpalaPossible[0]);
+//		}
+//		if (positionImpalaPossible[1] >= 0) {
+//			res = res +"  "+ to_string(positionImpalaPossible[1]);
+//		}
+//		if (positionImpalaPossible[2] >= 0) {
+//			res = res +"  " + to_string(positionImpalaPossible[2]);
+//		}
+//		res += " ]";
+//	return res;
+//}
+//
+//bool Joueur::isImpalaPositionDisponnible(int positionImpalaJones,
+//		int* positionImpalaPossible) {
+//	if (positionImpalaJones >= 0) {
+//		if (positionImpalaJones != positionImpalaPossible[0]
+//				&& positionImpalaJones != positionImpalaPossible[1]
+//				&& positionImpalaJones != positionImpalaPossible[2]) {
+//			return false;
+//		} else {
+//			return true;
+//		}
+//	} else {
+//		return false;
+//	}
+//}
 
 void Joueur::getPionsRestants() {
 	cout << "[ [1] Gazelle : " << pions[0].size();

@@ -32,7 +32,13 @@ public:
 	const vector<vector<Case*> >& getCases() const;
 
 	void setCases(int i, int j,Pion* pion);
-
+	void saisirImpalaJonesPosition();
+	bool isImpalaPositionDisponnible(int positionImpalaJones,int* positionImpalaPossible);
+	string getImpalaJonesPossibleString();
+	void updateSelonReglesDeJeux(int i,int j);
+	void updateEFFRAYANT(int i,int j);
+	void updateEFFRAYE(int i,int j);
+	void updateSAUTEUR(int i,int j);
 
 	friend ostream& operator<<(ostream& os, const Plateau& plateau) {
 		/*

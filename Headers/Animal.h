@@ -24,6 +24,9 @@ public:
 	void setType(TypeAnimal type) {
 		this->type = type;
 	}
+	/*virtual string getType(){
+return NULL;
+	}*/
 
 protected:
 private:

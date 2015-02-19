@@ -64,7 +64,7 @@ public:
 int getIdJoueur() const {
 		return idJoueur;
 	}
-
+//virtual string getType();
 protected:
 	bool cache; /* Pion cache ou pas {True , False}*/
 	int valeur; /* Le nombre de points du pion */

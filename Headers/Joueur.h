@@ -36,8 +36,8 @@ public:
 	const vector<int>& getInauguration() const;
 	void setInauguration(const vector<int>& inauguration);
 	void addInaugurationForIdScteur(int idSecteur);
-	string getImpalaJonesPossibleString(Plateau* plateau);
-	bool isImpalaPositionDisponnible(int positionImpalaJones,int* positionImpalaPossible);
+	//string getImpalaJonesPossibleString(Plateau* plateau);
+	//bool isImpalaPositionDisponnible(int positionImpalaJones,int* positionImpalaPossible);
 	bool isFinJeux(int *positionImpalaPossible);
 protected:
 private:

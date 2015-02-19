@@ -49,48 +49,49 @@ public:
 		cout << "Partie.start() : Jeux Commencé !!!" << endl;
 		//copy(inauguration.begin(), inauguration.end(), ostream_iterator<int>(cout, " "));
 
-		Pion* pionJoueur1 = new Zebre(0);
-		Pion* pionJoueur2 = new Zebre(1);
-		plateau->setCases(0, 1, pionJoueur1);
-		plateau->setCases(1, 1, pionJoueur1);
-		plateau->setCases(2, 1, pionJoueur1);
-		plateau->setCases(3, 1, pionJoueur2);
-		plateau->setCases(4, 1, pionJoueur2);
+
+		plateau->setCases(0, 1, new Zebre(0));
+		plateau->setCases(1, 1, new Zebre(0));
+		plateau->setCases(2, 1,new Zebre(0));
+		plateau->setCases(3, 1, new Zebre(1));
+		plateau->setCases(4, 1, new Zebre(1));
 
 		/*plateau->setCases(0, 2, pionJoueur2);
-		plateau->setCases(1, 2, pionJoueur2);
-		plateau->setCases(2, 2, pionJoueur2);
-		plateau->setCases(3, 2, pionJoueur1);
-		plateau->setCases(4, 2, pionJoueur1);
+		 plateau->setCases(1, 2, pionJoueur2);
+		 plateau->setCases(2, 2, pionJoueur2);
+		 plateau->setCases(3, 2, pionJoueur1);
+		 plateau->setCases(4, 2, pionJoueur1);
 
-		plateau->setCases(0, 3, pionJoueur2);
-		plateau->setCases(1, 3, pionJoueur2);
-		plateau->setCases(2, 3, pionJoueur2);
-		plateau->setCases(3, 3, pionJoueur1);
-		plateau->setCases(4, 3, pionJoueur1);
+		 plateau->setCases(0, 3, pionJoueur2);
+		 plateau->setCases(1, 3, pionJoueur2);
+		 plateau->setCases(2, 3, pionJoueur2);
+		 plateau->setCases(3, 3, pionJoueur1);
+		 plateau->setCases(4, 3, pionJoueur1);
 
-		plateau->setCases(0, 4, pionJoueur2);
-		plateau->setCases(1, 4, pionJoueur2);
-		plateau->setCases(2, 4, pionJoueur2);
-		plateau->setCases(3, 4, pionJoueur1);
-		plateau->setCases(4, 4, pionJoueur1);
+		 plateau->setCases(0, 4, pionJoueur2);
+		 plateau->setCases(1, 4, pionJoueur2);
+		 plateau->setCases(2, 4, pionJoueur2);
+		 plateau->setCases(3, 4, pionJoueur1);
+		 plateau->setCases(4, 4, pionJoueur1);
 
-		plateau->setCases(0, 5, pionJoueur2);
-		plateau->setCases(1, 5, pionJoueur2);
-		plateau->setCases(2, 5, pionJoueur2);
-		plateau->setCases(3, 5, pionJoueur1);
-		plateau->setCases(4, 5, pionJoueur1);
+		 plateau->setCases(0, 5, pionJoueur2);
+		 plateau->setCases(1, 5, pionJoueur2);
+		 plateau->setCases(2, 5, pionJoueur2);
+		 plateau->setCases(3, 5, pionJoueur1);
+		 plateau->setCases(4, 5, pionJoueur1);
 
-		plateau->setCases(1, 0, pionJoueur2);
-		plateau->setCases(2, 0, pionJoueur2);
-		plateau->setCases(3, 0, pionJoueur1);
-		plateau->setCases(4, 0, pionJoueur1);*/
+		 plateau->setCases(1, 0, pionJoueur2);
+		 plateau->setCases(2, 0, pionJoueur2);
+		 plateau->setCases(3, 0, pionJoueur1);
+		 plateau->setCases(4, 0, pionJoueur1);*/
 		cout << *plateau;
 		/*plateau->getImpalaJones() == NULL ?
-				cout << "impala est NULL" : cout << "impala est  NON NULL";*/
-		plateau->getImpalaJones()->setPosition(0);
+		 cout << "impala est NULL" : cout << "impala est  NON NULL";*/
+		//plateau->getImpalaJones()->setPosition(0);
 		//joueurs[0]->jouer(plateau, impalaJones);
-		int* positionImpalaPossible = plateau->getImpalaJones()->getPositionPossible(plateau);
+		//saisirImpalaJonesPosition();
+		int* positionImpalaPossible =
+				plateau->getImpalaJones()->getPositionPossible(plateau);
 		while (!isFinJeux(positionImpalaPossible)) {
 			joueurs[0]->jouer(plateau, plateau->getImpalaJones());
 			positionImpalaPossible =
@@ -181,10 +182,58 @@ public:
 		}
 
 	}
+
+	void saisirImpalaJonesPosition() {
+		int positionImpalaJones = -1;
+		int* positionImpalaPossible =
+				plateau->getImpalaJones()->getPositionPossible(plateau);
+		cout << "Veuillez choisir la position de ImpalaJones :" << endl;
+		cout << getImpalaJonesPossibleString(plateau);
+		cin >> positionImpalaJones;
+		while (!isImpalaPositionDisponnible(positionImpalaJones,
+				positionImpalaPossible)) {
+			cin >> positionImpalaJones;
+		}
+		cout << "La Position choisit pour Impala est " << positionImpalaJones
+				<< endl;
+		plateau->getImpalaJones()->setPosition(positionImpalaJones);
+	}
+
+	string getImpalaJonesPossibleString(Plateau* plateau) {
+		int* positionImpalaPossible =
+				plateau->getImpalaJones()->getPositionPossible(plateau);
+		string res = "[ ";
+		if (positionImpalaPossible[0] >= 0) {
+			res = res +"  "+ to_string(positionImpalaPossible[0]);
+		}
+		if (positionImpalaPossible[1] >= 0) {
+			res = res +"  "+ to_string(positionImpalaPossible[1]);
+		}
+		if (positionImpalaPossible[2] >= 0) {
+			res = res +"  " + to_string(positionImpalaPossible[2]);
+		}
+		res += " ]";
+		return res;
+	}
+
+	bool isImpalaPositionDisponnible(int positionImpalaJones,
+			int* positionImpalaPossible) {
+		if (positionImpalaJones >= 0) {
+			if (positionImpalaJones != positionImpalaPossible[0]
+					&& positionImpalaJones != positionImpalaPossible[1]
+					&& positionImpalaJones != positionImpalaPossible[2]) {
+				return false;
+			} else {
+				return true;
+			}
+		} else {
+			return false;
+		}
+	}
 protected:
 private:
 	Plateau* plateau;
-	int tour=-1;
+	int tour = -1;
 	vector<Joueur*> joueurs;
 };
 
