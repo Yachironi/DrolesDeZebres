@@ -29,6 +29,7 @@ public:
 	static Partie* initJeuxSauvgarde();
 	static Partie* initMultijoueur();
 	static Partie* initContrePC();
+	static Partie* chargerPartie(string nomFichier);
 
 protected:
 private:
@@ -95,21 +96,129 @@ Partie* JeuxFabrique::initJeux() {
 	return partieFabrique;
 	exit(0);
 }
-
-Partie* JeuxFabrique::initJeuxSauvgarde() {
+Partie* JeuxFabrique::chargerPartie(string nomFichier) {
 	Partie* partieFabrique = NULL;
-	string initJeuxSauvgarde;
-	while (initJeuxSauvgarde != "NON TROUVE") {
-		cout << "Fichier non trouve" << endl;
-	}/*
-
 	Plateau* plateau = new Plateau(Plateau::CONFIGURATIONSTANDARD);
 	ImpalaJones* impalaJones = new ImpalaJones();
 	vector<Joueur*> joueurs;
-	int typePartie; // Chargement du fichier
-	joueurs.push_back(new Humain("psuedo"));
-	joueurs.push_back(new Ordinateur());
-	joueurs[1]*/
+
+	joueurs.push_back(new Humain("1"));
+	joueurs.push_back(new Humain("2"));
+	partieFabrique = new Partie(plateau, impalaJones, joueurs);
+
+	char buffer[256];
+	fstream out;
+	out.open("partie1.txt", ios::in); //TODO change au meme nom du fichier
+	/* charger le plateau dans le fichier (5*6=30 lignes) */
+	for (int i = 0; i < 30; i++) {
+		out.getline(buffer, 256, '\n');
+		/* split une ligne dans string informations[4] */
+		string informations[4];
+		char * pch;
+		pch = strtok(buffer, " ");
+		int k = 0;
+		while (pch != NULL) {
+			informations[k] = pch;
+			pch = strtok(NULL, " ");
+			k++;
+		}
+		/* case est NULL */
+		if (informations[0] == "0") {
+			plateau->setCases(i / 6, i % 6, NULL);
+		}
+		/* y a pion dans la case */
+		else {
+			/* idJoueur */
+			int idJoueurTemp = stol(informations[2]);
+			/* creer new TypeDePion par rapport informations[1] */
+			Pion* pionTemp;
+			if (informations[1] == "G") {
+				pionTemp = new Gazelle(idJoueurTemp);
+			} else if (informations[1] == "Z") {
+				pionTemp = new Zebre(idJoueurTemp);
+			} else if (informations[1] == "E") {
+				pionTemp = new Elephant(idJoueurTemp);
+			} else if (informations[1] == "L") {
+				pionTemp = new Lion(idJoueurTemp);
+			} else if (informations[1] == "C") {
+				pionTemp = new Crocodile(idJoueurTemp);
+			}
+			/* n'est pas Cache */
+			if (informations[3] == "0") {
+				pionTemp->setCache(false);
+			}
+			/* isCache */
+			else {
+				pionTemp->setCache(true);
+			}
+			plateau->setCases(i / 6, i % 6, pionTemp);
+		}
+	}
+	/* 31eme ligne : charger position d'ImpalaJones */
+	out.getline(buffer, 256, '\n');
+	int impalaPosition = stol(buffer);
+	plateau->getImpalaJones()->setPosition(impalaPosition);
+	/* 32eme ligne : charger int tour */
+	out.getline(buffer, 256, '\n');
+	int tour = stol(buffer);
+	partieFabrique->setTour(tour);
+	/* enregistrer les 2 joueurs */
+	for (int i = 0; i < 2; i++) {
+		out.getline(buffer, 256, '\n');
+		/* split une ligne dans string informations[2] */
+		string informations[2];
+		char * pch;
+		pch = strtok(buffer, " ");
+		int k = 0;
+		while (pch != NULL) {
+			informations[k] = pch;
+			pch = strtok(NULL, " ");
+			k++;
+		}
+		/* charger idJouerur et Pseudo "idJoueur(int) pseudo(string)" */
+		int idJoueur = stol(informations[0]);
+		joueurs[i]->setIdJoueur(idJoueur);
+		joueurs[i]->setPseudo(informations[1]);
+
+		/* charger le nombre des 5 types de pion "nbGazelle nbZebre nbElephant nbLion nbCrocodile" */
+		out.getline(buffer, 256, '\n');
+		/* split une ligne dans string informations[2] */
+		string informationsBis[5];
+		char * pchBis;
+		pchBis = strtok(buffer, " ");
+		int kBis = 0;
+		while (pchBis != NULL) {
+			informationsBis[kBis] = pchBis;
+			pchBis = strtok(NULL, " ");
+			kBis++;
+		}
+		int nbG = stol(informationsBis[0]);
+		int nbZ = stol(informationsBis[1]);
+		int nbE = stol(informationsBis[2]);
+		int nbL = stol(informationsBis[3]);
+		int nbC = stol(informationsBis[4]);
+		joueurs[i]->setPionsRestant(nbG, nbZ, nbE, nbL, nbC);
+
+		//joueurs[i]->setPionsRestant(1,2,3,4,5);
+	}
+
+	out.close();
+
+	return partieFabrique;
+}
+
+Partie* JeuxFabrique::initJeuxSauvgarde() {
+	Partie* partieFabrique = NULL;
+
+	string nomFichier;
+	cout << "Veillez Saisir le nom du fichier de sauvgarde :" << endl;
+	cin >> nomFichier;
+	while(nomFichier!="NONExiste"){
+		cin >> nomFichier;
+	}
+
+	partieFabrique = chargerPartie(nomFichier);
+
 	return partieFabrique;
 }
 
@@ -132,7 +241,7 @@ Partie* JeuxFabrique::initMultijoueur() {
 
 	partieFabrique = new Partie(plateau, impalaJones, joueurs);
 	cout << "==> ICI <===" << endl;
-
+	partieFabrique->setTypeParie(0);
 	return partieFabrique;
 }
 Partie* JeuxFabrique::initContrePC() {
@@ -147,9 +256,9 @@ Partie* JeuxFabrique::initContrePC() {
 	cout << "Veuillez saisir votre pseudo : ";
 	cin >> pseudo;
 	joueurs.push_back(new Humain(pseudo));
-
 	partieFabrique = new Partie(plateau, impalaJones, joueurs);
-	cout << "==> ICI <===" << endl;
+
+	partieFabrique->setTypeParie(1);
 
 	return partieFabrique;
 }

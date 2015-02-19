@@ -6,7 +6,7 @@
  */
 
 #include "Joueur.h"
-#include <string>
+
 #include <iostream>
 
 #include "Case.h"
@@ -109,38 +109,24 @@ bool Joueur::isFinJeux(int *positionImpalaPossible) {
 	}
 }
 
-//
-//string Joueur::getImpalaJonesPossibleString(Plateau* plateau) {
-//	int* positionImpalaPossible =
-//			plateau->getImpalaJones()->getPositionPossible(plateau);
-//	string res = "[";
-//	if (positionImpalaPossible[0] >= 0) {
-//			res = res +"  "+ to_string(positionImpalaPossible[0]);
-//		}
-//		if (positionImpalaPossible[1] >= 0) {
-//			res = res +"  "+ to_string(positionImpalaPossible[1]);
-//		}
-//		if (positionImpalaPossible[2] >= 0) {
-//			res = res +"  " + to_string(positionImpalaPossible[2]);
-//		}
-//		res += " ]";
-//	return res;
-//}
-//
-//bool Joueur::isImpalaPositionDisponnible(int positionImpalaJones,
-//		int* positionImpalaPossible) {
-//	if (positionImpalaJones >= 0) {
-//		if (positionImpalaJones != positionImpalaPossible[0]
-//				&& positionImpalaJones != positionImpalaPossible[1]
-//				&& positionImpalaJones != positionImpalaPossible[2]) {
-//			return false;
-//		} else {
-//			return true;
-//		}
-//	} else {
-//		return false;
-//	}
-//}
+void Joueur::setPionsRestant(int nbG, int nbZ, int nbE, int nbL, int nbC) {
+	pions[0].erase(pions[0].begin(), pions[0].end());
+	pions[1].erase(pions[1].begin(), pions[1].end());
+	pions[2].erase(pions[2].begin(), pions[2].end());
+	pions[3].erase(pions[3].begin(), pions[3].end());
+	pions[4].erase(pions[4].begin(), pions[4].end());
+	for (unsigned int i = 0; i < nbG; i++)
+		pions[0].push_back(new Gazelle(idJoueur));
+	for (unsigned int i = 0; i < nbZ; i++)
+		pions[1].push_back(new Zebre(idJoueur));
+	for (unsigned int i = 0; i < nbE; i++)
+		pions[2].push_back(new Elephant(idJoueur));
+	for (unsigned int i = 0; i < nbL; i++)
+		pions[3].push_back(new Lion(idJoueur));
+	for (unsigned int i = 0; i < nbC; i++)
+		pions[4].push_back(new Crocodile(idJoueur));
+
+}
 
 void Joueur::getPionsRestants() {
 	cout << "[ [1] Gazelle : " << pions[0].size();
@@ -174,17 +160,6 @@ void Joueur::setScore(int score) {
 	this->score = score;
 }
 
-const vector<int>& Joueur::getInauguration() const {
-	return inauguration;
-}
-
-void Joueur::setInauguration(const vector<int>& inauguration) {
-	this->inauguration = inauguration;
-}
-
-void Joueur::addInaugurationForIdScteur(int idSecteur) {
-	inauguration.push_back(idSecteur);
-}
 int Joueur::gettacticImpalaJonesPosition(Plateau* plateau){return -1;}
 int* Joueur::gettacticPositionPionAdeposer(Plateau* plateau){return NULL;}
 int Joueur::gettacticTypePionAdeposer(){return -1;};

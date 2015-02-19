@@ -35,20 +35,27 @@ public:
 	void setScore(int score);
 	const vector<int>& getInauguration() const;
 	void setInauguration(const vector<int>& inauguration);
-	void addInaugurationForIdScteur(int idSecteur);
 	int saisirPionAdeposer();
 	virtual int gettacticImpalaJonesPosition(Plateau* plateau);
 	virtual int* gettacticPositionPionAdeposer(Plateau* plateau);
 	virtual int gettacticTypePionAdeposer();
-
+	void setPionsRestant(int nbG, int nbZ, int nbE, int nbL, int nbC);
 
 	//string getImpalaJonesPossibleString(Plateau* plateau);
 	//bool isImpalaPositionDisponnible(int positionImpalaJones,int* positionImpalaPossible);
 	bool isFinJeux(int *positionImpalaPossible);
+
+	const vector<vector<Pion*> >& getPions() const {
+		return pions;
+	}
+
+	void setPions(const vector<vector<Pion*> >& pions) {
+		this->pions = pions;
+	}
+
 protected:
 private:
 	vector<vector<Pion*>> pions;
-	vector<int> inauguration;
 	int score;
 	int idJoueur;
 	string pseudo;

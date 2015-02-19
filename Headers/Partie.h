@@ -8,13 +8,20 @@
 #if !defined(__ImpalaJones_Partie_h)
 #define __ImpalaJones_Partie_h
 
-#include <algorithm> // for copy
+#include <fstream>
 #include <iostream>
-#include <iterator>
 #include <string>
 #include <vector>
+#include <cstdlib>
+#include <iostream>
+#include <stdlib.h>
+#include<cstring>
+#include<string>
+
 
 #include "Case.h"
+#include "Crocodile.h"
+#include "Elephant.h"
 #include "Gazelle.h"
 #include "ImpalaJones.h"
 #include "Joueur.h"
@@ -52,10 +59,9 @@ public:
 		cout << "Partie.start() : Jeux Commencé !!!" << endl;
 		//copy(inauguration.begin(), inauguration.end(), ostream_iterator<int>(cout, " "));
 
-
 		plateau->setCases(2, 4, new Gazelle(0));
 		plateau->setCases(3, 3, new Zebre(0));
-		plateau->setCases(3, 5,new Lion(0));
+		plateau->setCases(3, 5, new Lion(0));
 		plateau->setCases(4, 4, new Zebre(1));
 		plateau->setCases(4, 1, new Zebre(1));
 
@@ -97,6 +103,9 @@ public:
 				plateau->getImpalaJones()->getPositionPossible(plateau);
 		while (!isFinJeux(positionImpalaPossible)) {
 			joueurs[0]->jouer(plateau, plateau->getImpalaJones());
+			cout<<"DEB SAUVGUARDE"<<endl;
+			enregistrer();
+			cout<<"FIN SAUVGUARDE"<<endl;
 			positionImpalaPossible =
 					plateau->getImpalaJones()->getPositionPossible(plateau);
 			if (!isFinJeux(positionImpalaPossible)) {
@@ -130,11 +139,11 @@ public:
 		for (idSecteur = 0; idSecteur < 6; idSecteur++) {
 			Joueur* gagnant = getGagnantByIdSecteur(idSecteur);
 			/* Ajout de Points d'inauguration */
-			if (find(gagnant->getInauguration().begin(),
-					gagnant->getInauguration().end(), idSecteur)
-					!= gagnant->getInauguration().end()) {
-				gagnant->setScore(gagnant->getScore() + 5);
-			}
+//			if (find(gagnant->getInauguration().begin(),
+//					gagnant->getInauguration().end(), idSecteur)
+//					!= gagnant->getInauguration().end()) {
+//				gagnant->setScore(gagnant->getScore() + 5);
+//			}
 			/* Parcour du plateau pour calculer le score final sur le secteur */
 			for (unsigned int i = 0; i < plateau->getCases().size(); i++) {
 				for (unsigned int j = 0; j < plateau->getCases()[0].size();
@@ -207,13 +216,13 @@ public:
 				plateau->getImpalaJones()->getPositionPossible(plateau);
 		string res = "[ ";
 		if (positionImpalaPossible[0] >= 0) {
-			res = res +"  "+ to_string(positionImpalaPossible[0]);
+			res = res + "  " + to_string(positionImpalaPossible[0]);
 		}
 		if (positionImpalaPossible[1] >= 0) {
-			res = res +"  "+ to_string(positionImpalaPossible[1]);
+			res = res + "  " + to_string(positionImpalaPossible[1]);
 		}
 		if (positionImpalaPossible[2] >= 0) {
-			res = res +"  " + to_string(positionImpalaPossible[2]);
+			res = res + "  " + to_string(positionImpalaPossible[2]);
 		}
 		res += " ]";
 		return res;
@@ -233,12 +242,89 @@ public:
 			return false;
 		}
 	}
+
+	/* enregistrer la partie */
+	void enregistrer() {
+		ofstream in;
+		in.open("partie0.txt", ios::trunc);
+		/* enregistrer plateau dans le fichier (5*6=30 lignes) */
+		for (int i = 0; i < 5; i++) {
+			for (int j = 0; j < 6; j++) {
+				Pion* pionTemp = plateau->getCases()[i][j]->pion;
+				/* y a pas de pion dans la case, on met 0 dans la ligne */
+				if (pionTemp == NULL) {
+					in << "0" << "\n";
+				}
+				/* si y a pion, on met "1 type(char) idJoueur(int) cache(bool)" */
+				else {
+					in << "1 " << pionTemp->getIntitulePion()[0] << " "
+							<< pionTemp->getIdJoueur() << " "
+							<< pionTemp->isCache() << "\n";
+				}
+			}
+		}
+		/* 31eme ligne : position d'ImpalaJones */
+		in << plateau->getImpalaJones()->getPosition() << "\n";
+		/* 32eme ligne : enregistrer int tour */
+		in << tour << "\n";
+		/* enregistrer les 2 joueurs */
+		for (int i = 0; i < 2; i++) {
+			/* enregistrer idJouerur et Pseudo "idJoueur(int) pseudo(string)" */
+			in << joueurs[i]->getIdJoueur() << " " << joueurs[i]->getPseudo()
+					<< "\n";
+			/* enregistrer le nombre des 5 types de pion "nbGazelle nbZebre nbElephant nbLion nbCrocodile" */
+			for (int j = 0; j < 5; j++) {
+				in << joueurs[i]->getPions()[j].size() << " ";
+			}
+			in << "\n";
+		}
+		in.close();
+		cout << "enregistrer fini" << endl;		//TODO supprimer apres test
+	}
+
+	bool isIsInnaugure() const {
+		return isInnaugure;
+	}
+
+	void setIsInnaugure(bool isInnaugure) {
+		this->isInnaugure = isInnaugure;
+	}
+
+	const vector<Joueur*>& getJoueurs() const {
+		return joueurs;
+	}
+
+	void setJoueurs(const vector<Joueur*>& joueurs) {
+		this->joueurs = joueurs;
+	}
+
+	Plateau* getPlateau(){
+		return plateau;
+	}
+
+	int getTour() const {
+		return tour;
+	}
+
+	void setTour(int tour = -1) {
+		this->tour = tour;
+	}
+
+	int getTypeParie() const {
+		return typeParie;
+	}
+
+	void setTypeParie(int typeParie) {
+		this->typeParie = typeParie;
+	}
+
 protected:
 private:
 	Plateau* plateau;
-	int tour = -1;
 	vector<Joueur*> joueurs;
 	int typeParie;
+	int tour = -1;
+	bool isInnaugure;
 };
 
 #endif
