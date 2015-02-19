@@ -1,4 +1,3 @@
-
 /***********************************************************************
  * Module:  Humain.h
  * Author:  Yasser RABI & Zheng ZHANG
@@ -13,12 +12,19 @@ using namespace std;
 
 #include "../Headers/Joueur.h"
 
-class Humain : public Joueur
-{
+class Humain: public Joueur {
 public:
-	Humain(string pseudo) :Joueur(pseudo){
-		}
-protected:
+	Humain(string pseudo) :
+			Joueur(pseudo) {
+	}
+
+	~Humain(){
+
+	}
+	int gettacticImpalaJonesPosition(Plateau* plateau);
+	int* gettacticPositionPionAdeposer(Plateau* plateau);
+	int gettacticTypePionAdeposer();
+	protected:
 private:
 
 };

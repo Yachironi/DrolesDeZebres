@@ -33,66 +33,65 @@ Joueur::Joueur(string pseudo) :
 	pions[4].push_back(new Crocodile(idJoueur));
 	pions[4].push_back(new Crocodile(idJoueur));
 }
+/*Joueur::~Joueur(){
+
+}*/
+
 
 void Joueur::jouer(Plateau* plateau, ImpalaJones* impalaJones) {
-	cout << "### DEB ### Tour de ===>   " << pseudo <<"   <==="<< endl;
+	cout << "### DEB ### Tour de ===>   " << pseudo << "   <===" << endl;
 	int i = -1, j = -1;
 	if (plateau->getImpalaJones()->getPosition() == -1) {
 		cout << *plateau << endl;
-		plateau->saisirImpalaJonesPosition();
+		int positionImpalaJones = gettacticImpalaJonesPosition(plateau);
+		plateau->getImpalaJones()->setPosition(positionImpalaJones);
 	} else {
 		cout << *plateau << endl;
 		cout << "Position  ImpalaJones = "
 				<< plateau->getImpalaJones()->getPosition() << endl;
-		cout << "Veillez saisir votre movement [i,j]:" << endl;
-		cout<<"N° Ligne   = ";cin >> i;
-		cout<<"N° Colonne = ";cin >> j;
-		while (!plateau->estPossible(i, j)) {
-			cout << "Veillez saisir votre movement [i,j]:" << endl;
-			cin >> i;
-			cin >> j;
-		}
+
+		/* Saisie de position de pion*/
+		//int* positionPionAdeposer = plateau->saisirPositionPion();
+		int* positionPionAdeposer = gettacticPositionPionAdeposer(plateau);
+		i = positionPionAdeposer[0];
+		j = positionPionAdeposer[1];
+
+		/* Saisie de type de pion */
 		int pionAdeposer = 0;
-		cout << "Veuillez choisir le pion à deposer :" << endl;
-		getPionsRestants();
-		cin >> pionAdeposer;
-		while (!isPionTypeEstDisponnible(pionAdeposer)) {
-			cin >> pionAdeposer;
-		}
-		pionAdeposer--;
-		//cout << "SIZE OF PIONS[pionAdeposer] = " << pions[pionAdeposer].size()<< endl;
+		//pionAdeposer = saisirPionAdeposer();
+
+		cout<<"===> DEB TACTIC <==="<<endl;
+		pionAdeposer = gettacticTypePionAdeposer();
+		cout<<"===> FIN TACTIC <==="<<endl;
+		cout<<"===> DEB ICI <==="<<endl;
+		cout<<"pionAdeposer="<<pionAdeposer<<endl;
+		cout<<" pions[pionAdeposer].size= "<< pions[pionAdeposer].size();
 		plateau->getCases()[i][j]->pion = pions[pionAdeposer].front();
 		pions[pionAdeposer].erase(pions[pionAdeposer].begin());
-		//getPionsRestants();
-
-//		int* positionImpalaPossible =plateau->getImpalaJones()->getPositionPossible(plateau);
-//		int positionImpalaJones = -1;
-//		if (!isFinJeux(positionImpalaPossible)) {
-//			cout << "Veuillez choisir la position de ImpalaJones :" << endl;
-//			cout << getImpalaJonesPossibleString(plateau);
-//			cin >> positionImpalaJones;
-//			while (!isImpalaPositionDisponnible(positionImpalaJones,
-//					positionImpalaPossible)) {
-//				cin >> positionImpalaJones;
-//			}
-//			cout << "La Position choisit pour Impala est "
-//					<< positionImpalaJones << endl;
-//			plateau->getImpalaJones()->setPosition(positionImpalaJones);
-//		}
-		plateau->saisirImpalaJonesPosition();
-		plateau->updateSelonReglesDeJeux(i,j);
+		cout<<"===> FIN ICI <==="<<endl;
+		/* Saisie de position de ImpalaJones */
+		//int positionImpalaJones = plateau->saisirImpalaJonesPosition();
+		int positionImpalaJones = gettacticImpalaJonesPosition(plateau);
+		cout << "AVANT positionImpalaJones=" << positionImpalaJones;
+		plateau->getImpalaJones()->setPosition(positionImpalaJones);
+		cout << "APRES positionImpalaJones="
+				<< plateau->getImpalaJones()->getPosition();
+		plateau->updateSelonReglesDeJeux(i, j);
 	}
-	cout << "\n### FIN ### Tour de ===>   " << pseudo <<"   <===\n"<< endl;
+	cout << "\n### FIN ### Tour de ===>   " << pseudo << "   <===\n" << endl;
 
 }
 
-bool Joueur::isFinJeux(int *positionImpalaPossible) {
-	if (positionImpalaPossible[0] == -1 && positionImpalaPossible[1] == -1
-			&& positionImpalaPossible[2] == -1) {
-		return true;
-	} else {
-		return false;
+int Joueur::saisirPionAdeposer() {
+	int pionAdeposer = -1;
+	cout << "Veuillez choisir le pion à deposer :" << endl;
+	getPionsRestants();
+	cin >> pionAdeposer;
+	while (!isPionTypeEstDisponnible(pionAdeposer)) {
+		cin >> pionAdeposer;
 	}
+	pionAdeposer--;
+	return pionAdeposer;
 }
 
 bool Joueur::isPionTypeEstDisponnible(int pionAdeposer) {
@@ -109,6 +108,16 @@ bool Joueur::isPionTypeEstDisponnible(int pionAdeposer) {
 		return false;
 	}
 }
+
+bool Joueur::isFinJeux(int *positionImpalaPossible) {
+	if (positionImpalaPossible[0] == -1 && positionImpalaPossible[1] == -1
+			&& positionImpalaPossible[2] == -1) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
 //
 //string Joueur::getImpalaJonesPossibleString(Plateau* plateau) {
 //	int* positionImpalaPossible =
@@ -185,5 +194,8 @@ void Joueur::setInauguration(const vector<int>& inauguration) {
 void Joueur::addInaugurationForIdScteur(int idSecteur) {
 	inauguration.push_back(idSecteur);
 }
+int Joueur::gettacticImpalaJonesPosition(Plateau* plateau){return -1;}
+int* Joueur::gettacticPositionPionAdeposer(Plateau* plateau){return NULL;}
+int Joueur::gettacticTypePionAdeposer(){return -1;};
 
 int Joueur::id = 0;

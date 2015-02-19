@@ -32,7 +32,8 @@ public:
 	const vector<vector<Case*> >& getCases() const;
 
 	void setCases(int i, int j,Pion* pion);
-	void saisirImpalaJonesPosition();
+	int saisirImpalaJonesPosition();
+	int* saisirPositionPion();
 	bool isImpalaPositionDisponnible(int positionImpalaJones,int* positionImpalaPossible);
 	string getImpalaJonesPossibleString();
 	void updateSelonReglesDeJeux(int i,int j);

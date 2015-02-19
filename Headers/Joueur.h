@@ -36,6 +36,12 @@ public:
 	const vector<int>& getInauguration() const;
 	void setInauguration(const vector<int>& inauguration);
 	void addInaugurationForIdScteur(int idSecteur);
+	int saisirPionAdeposer();
+	virtual int gettacticImpalaJonesPosition(Plateau* plateau);
+	virtual int* gettacticPositionPionAdeposer(Plateau* plateau);
+	virtual int gettacticTypePionAdeposer();
+
+
 	//string getImpalaJonesPossibleString(Plateau* plateau);
 	//bool isImpalaPositionDisponnible(int positionImpalaJones,int* positionImpalaPossible);
 	bool isFinJeux(int *positionImpalaPossible);

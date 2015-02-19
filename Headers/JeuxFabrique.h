@@ -1,4 +1,3 @@
-
 /***********************************************************************
  * Module:  JeuxFabrique.h
  * Author:  Yasser RABI & Zheng ZHANG
@@ -9,12 +8,11 @@
 #if !defined(__ImpalaJones_JeuxFabrique_h)
 #define __ImpalaJones_JeuxFabrique_h
 
-
-
 #include <vector>
 
 #include "Humain.h"
 #include "ImpalaJones.h"
+#include "Ordinateur.h"
 #include "Partie.h"
 #include "Plateau.h"
 
@@ -50,11 +48,11 @@ Partie* JeuxFabrique::init() {
 	}
 	switch (typeJeuxInt) {
 	case 1:
-		partieFabrique=initJeux();
+		partieFabrique = initJeux();
 		cout << "Fin initialiation jeux a deux" << endl;
 		break;
 	case 2:
-		partieFabrique=initJeuxSauvgarde();
+		partieFabrique = initJeuxSauvgarde();
 		cout << "typeJeux = 2" << endl;
 		cout << "Fin chargement de jeux" << endl;
 
@@ -83,10 +81,10 @@ Partie* JeuxFabrique::initJeux() {
 	}
 	switch (modeJeuxInt) {
 	case 1:
-		partieFabrique=initMultijoueur();
+		partieFabrique = initMultijoueur();
 		break;
 	case 2:
-		partieFabrique=initContrePC();
+		partieFabrique = initContrePC();
 		break;
 	case 3:
 		exit(0);
@@ -103,33 +101,56 @@ Partie* JeuxFabrique::initJeuxSauvgarde() {
 	string initJeuxSauvgarde;
 	while (initJeuxSauvgarde != "NON TROUVE") {
 		cout << "Fichier non trouve" << endl;
-	}
+	}/*
+
+	Plateau* plateau = new Plateau(Plateau::CONFIGURATIONSTANDARD);
+	ImpalaJones* impalaJones = new ImpalaJones();
+	vector<Joueur*> joueurs;
+	int typePartie; // Chargement du fichier
+	joueurs.push_back(new Humain("psuedo"));
+	joueurs.push_back(new Ordinateur());
+	joueurs[1]*/
 	return partieFabrique;
 }
 
 Partie* JeuxFabrique::initMultijoueur() {
 	Partie* partieFabrique;
-		cout << "Jeux Multjoureur :" << endl;
-		Plateau* plateau = new Plateau(Plateau::CONFIGURATIONSTANDARD);
-		ImpalaJones* impalaJones = new ImpalaJones();
-		vector<Joueur*> joueurs;
-		string pseudo;
-		cout<<"Veuillez saisir le pseudo du premier joueur : ";
-		cin>>pseudo;
-		joueurs.push_back(new Humain(pseudo));
-		cout<<"Veuillez saisir le pseudo du deuxieme joueur : ";
-		cin>>pseudo;
+	cout << "Jeux Multjoureur :" << endl;
 
-		joueurs.push_back(new Humain(pseudo));
+	Plateau* plateau = new Plateau(Plateau::CONFIGURATIONSTANDARD);
+	ImpalaJones* impalaJones = new ImpalaJones();
+	vector<Joueur*> joueurs;
 
-		partieFabrique = new Partie(plateau,impalaJones,joueurs);
-		cout<<"==> ICI <==="<<endl;
+	string pseudo;
+	cout << "Veuillez saisir le pseudo du premier joueur : ";
+	cin >> pseudo;
+	joueurs.push_back(new Humain(pseudo));
+	cout << "Veuillez saisir le pseudo du deuxieme joueur : ";
+	cin >> pseudo;
 
-		return partieFabrique;
+	joueurs.push_back(new Humain(pseudo));
+
+	partieFabrique = new Partie(plateau, impalaJones, joueurs);
+	cout << "==> ICI <===" << endl;
+
+	return partieFabrique;
 }
 Partie* JeuxFabrique::initContrePC() {
 	Partie* partieFabrique = NULL;
-	cout << "Jeux contre PC" << endl;
+	cout << "Jeux contre Ordinateur" << endl;
+
+	Plateau* plateau = new Plateau(Plateau::CONFIGURATIONSTANDARD);
+	ImpalaJones* impalaJones = new ImpalaJones();
+	vector<Joueur*> joueurs;
+	string pseudo;
+	joueurs.push_back(new Ordinateur());
+	cout << "Veuillez saisir votre pseudo : ";
+	cin >> pseudo;
+	joueurs.push_back(new Humain(pseudo));
+
+	partieFabrique = new Partie(plateau, impalaJones, joueurs);
+	cout << "==> ICI <===" << endl;
+
 	return partieFabrique;
 }
 

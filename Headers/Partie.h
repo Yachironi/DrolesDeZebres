@@ -15,7 +15,10 @@
 #include <vector>
 
 #include "Case.h"
+#include "Gazelle.h"
+#include "ImpalaJones.h"
 #include "Joueur.h"
+#include "Lion.h"
 #include "Pion.h"
 #include "Plateau.h"
 #include "Zebre.h"
@@ -50,10 +53,10 @@ public:
 		//copy(inauguration.begin(), inauguration.end(), ostream_iterator<int>(cout, " "));
 
 
-		plateau->setCases(0, 1, new Zebre(0));
-		plateau->setCases(1, 1, new Zebre(0));
-		plateau->setCases(2, 1,new Zebre(0));
-		plateau->setCases(3, 1, new Zebre(1));
+		plateau->setCases(2, 4, new Gazelle(0));
+		plateau->setCases(3, 3, new Zebre(0));
+		plateau->setCases(3, 5,new Lion(0));
+		plateau->setCases(4, 4, new Zebre(1));
 		plateau->setCases(4, 1, new Zebre(1));
 
 		/*plateau->setCases(0, 2, pionJoueur2);
@@ -235,6 +238,7 @@ private:
 	Plateau* plateau;
 	int tour = -1;
 	vector<Joueur*> joueurs;
+	int typeParie;
 };
 
 #endif

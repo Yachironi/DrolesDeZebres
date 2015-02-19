@@ -19,6 +19,10 @@ class Ordinateur : public Joueur
 public:
 	Ordinateur() :Joueur("Ordinateur"){
 		}
+	int gettacticImpalaJonesPosition(Plateau* plateau);
+	int* gettacticPositionPionAdeposer(Plateau* plateau);
+	int gettacticTypePionAdeposer();
+
 protected:
 private:
 
