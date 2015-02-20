@@ -197,7 +197,7 @@ void Plateau::updateEFFRAYANT(int i, int j) {
 				TypeAnimal typeAnimal =
 						((Animal*) (cases[x][y]->pion))->getType();
 				if (typeAnimal == EFFRAYE) {
-					cout << "x,y = " << x << " ," << y << endl;
+				//	cout << "x,y = " << x << " ," << y << endl;
 
 					//cout << "EFFRAYE !!! " << endl;
 					cases[x][y]->pion->setCache(true);

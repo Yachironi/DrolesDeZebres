@@ -107,7 +107,6 @@ void Partie::continueOuQuitter() {
 			<< "[ ENTER ] = Continuer | [ \'S\' ] = Sauvegarde : | [ \'Q\' ] = Quitter : ";
 	char commande = cin.get();
 	commande = cin.get();
-	cout << "Choix = " << commande << endl;
 	if (commande != '\n') {
 		while (commande != 's' && commande != 'S' && commande != 'q'
 				&& commande != 'Q') {
@@ -120,13 +119,13 @@ void Partie::continueOuQuitter() {
 				commande = cin.get();
 			}
 			if (commande == 'o' || commande == 'O') {
+				enregistrer();
 				cout << "Sauvegarde fait avec succes." << endl;
 				cout << "Au revoir et a bientot..." << endl;
-				enregistrer();
 			}
 		} else if (commande == 'S' || commande == 's') {
-			cout << "Sauvegarde fait avec succes." << endl;
 			enregistrer();
+			cout << "Sauvegarde fait avec succes." << endl;
 			cout << "Continuer ? [ o/n ] : ";
 			char commande = cin.get();
 			while (commande != 'o' && commande != 'n') {

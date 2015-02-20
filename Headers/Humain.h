@@ -10,7 +10,7 @@
 
 using namespace std;
 
-#include "../Headers/Joueur.h"
+#include "Joueur.h"
 
 class Humain: public Joueur {
 public:
