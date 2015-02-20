@@ -20,7 +20,6 @@ public:
 	 * if getPositionPossible()==(-1,-1,-1) => false else true
 	 */
 	bool isPositionPossibleExist(Plateau* plateau);
-
 	int* getPositionPossible(Plateau* plateau);
 	void setPosition(int position);
 

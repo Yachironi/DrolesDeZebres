@@ -268,9 +268,6 @@ int ImpalaJones::getPosition() const {
 	return position;
 }
 bool ImpalaJones::mouvementEstPossible(int i, int j) {
-//	cout<<"==> mouvementEstPossible <=="<<endl;
-//	cout << "Position Impala Jones = " << position << endl;
-//	cout<<"[i,j] = "<<i<<" , "<<j<<endl;
 	if ((position >= 0 && position <= 5)) {
 		//cout<<"entree 1 "<<endl;
 		if ((j == position)) {
