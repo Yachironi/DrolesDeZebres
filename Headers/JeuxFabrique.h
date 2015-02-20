@@ -76,10 +76,12 @@ Partie* JeuxFabrique::initJeux() {
 	cout << "1 - Multijoueur \n2 - Contre ordinateur\n3 - Quit" << endl;
 	cin >> modeJeux;
 	int modeJeuxInt = atoi(modeJeux.c_str());
+
 	while (modeJeuxInt != 1 && modeJeuxInt != 2 && modeJeuxInt != 3) {
-		cin >> modeJeuxInt;
+		cin >> modeJeux;
 		modeJeuxInt = atoi(modeJeux.c_str());
 	}
+
 	switch (modeJeuxInt) {
 	case 1:
 		partieFabrique = initMultijoueur();
@@ -237,6 +239,8 @@ Partie* JeuxFabrique::initJeuxSauvgarde() {
 		} else {
 			break;
 		}
+
+
 		_file.close();
 	}
 

@@ -103,10 +103,11 @@ void Partie::start() {
 }
 
 void Partie::continueOuQuitter() {
+	char commande;
 	cout
 			<< "[ ENTER ] = Continuer | [ \'S\' ] = Sauvegarde : | [ \'Q\' ] = Quitter : ";
-	char commande = cin.get();
-	commande = cin.get();
+commande = cin.get();
+	//commande = cin.get();
 	if (commande != '\n') {
 		while (commande != 's' && commande != 'S' && commande != 'q'
 				&& commande != 'Q') {
