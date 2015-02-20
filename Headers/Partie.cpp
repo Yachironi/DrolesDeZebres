@@ -6,9 +6,13 @@
  */
 
 #include "Partie.h"
-
+#include <ctime>
 void Partie::start() {
-	cout << "Partie.start() : Jeux Commencé !!!" << endl;
+	std::srand(std::time(0));
+	cout << "+-------------------------------------------+"<< endl;
+	cout <<"             "<< joueurs[0]->getPseudo()<<"   VS   "<<joueurs[1]->getPseudo()<< endl;
+	cout << "+-------------------------------------------+"<< endl;
+	cout<<endl<<endl;
 	//copy(inauguration.begin(), inauguration.end(), ostream_iterator<int>(cout, " "));
 
 //	plateau->setCases(0, 0, new Gazelle(0));
@@ -72,7 +76,7 @@ void Partie::start() {
 	 plateau->setCases(3, 0, pionJoueur1);
 	 plateau->setCases(4, 0, pionJoueur1);*/
 
-	cout << *plateau;
+	//cout << *plateau;
 
 	int* positionImpalaPossible =
 			plateau->getImpalaJones()->getPositionPossible(plateau);
@@ -104,9 +108,9 @@ void Partie::start() {
 
 void Partie::continueOuQuitter() {
 	char commande;
-	cout
-			<< "[ ENTER ] = Continuer | [ \'S\' ] = Sauvegarde : | [ \'Q\' ] = Quitter : ";
-commande = cin.get();
+	cout<< "[ ENTER ] = Continuer | [ \'S\' ] = Sauvegarde : | [ \'Q\' ] = Quitter : "<<endl;
+	cin.clear();
+	commande = cin.get();
 	//commande = cin.get();
 	if (commande != '\n') {
 		while (commande != 's' && commande != 'S' && commande != 'q'
@@ -137,10 +141,7 @@ commande = cin.get();
 				exit(0);
 			}
 		}
-	} else {
-		cout << "Au revoir et a bientot..." << endl;
 	}
-	cout << "FIN.\n";
 }
 
 bool Partie::isFinJeux(int *positionImpalaPossible) {

@@ -37,6 +37,11 @@ private:
 };
 
 Partie* JeuxFabrique::init() {
+
+	cout << "+-------------------------------------------+"<< endl;
+	cout << "|      Bienvenue a Drole de Zebres          |"<< endl;
+	cout << "+-------------------------------------------+"<< endl;
+	cout<<endl<<endl;
 	Partie* partieFabrique;
 	string typeJeux;
 	cout << "Veillez saisir le type de jeux :" << endl;
@@ -50,19 +55,13 @@ Partie* JeuxFabrique::init() {
 	switch (typeJeuxInt) {
 	case 1:
 		partieFabrique = initJeux();
-		cout << "Fin initialiation jeux a deux" << endl;
 		break;
 	case 2:
 		partieFabrique = initJeuxSauvgarde();
-		cout << "typeJeux = 2" << endl;
-		cout << "Fin chargement de jeux" << endl;
-
 		break;
 	case 3:
 		exit(0);
 	default:
-		cout << "default";
-
 		break;
 	}
 	return partieFabrique;
@@ -92,7 +91,7 @@ Partie* JeuxFabrique::initJeux() {
 	case 3:
 		exit(0);
 	default:
-		cout << "default";
+
 		break;
 	}
 	return partieFabrique;
@@ -267,7 +266,6 @@ Partie* JeuxFabrique::initMultijoueur() {
 	joueurs.push_back(new Humain(pseudo));
 
 	partieFabrique = new Partie(plateau, impalaJones, joueurs);
-	cout << "==> ICI <===" << endl;
 	partieFabrique->setTypePartie(0);
 	return partieFabrique;
 }

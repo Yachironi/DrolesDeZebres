@@ -44,6 +44,7 @@ int* Ordinateur::gettacticPositionPionAdeposer(Plateau* plateau) {
 	int* positionPionAdeposer = new int[2];
 	int position = plateau->getImpalaJones()->getPosition();
 	int i, j;
+
 	if ((position >= 0 && position <= 5)) {
 		//cout<<"entree 1 "<<endl;
 		// (j == position)

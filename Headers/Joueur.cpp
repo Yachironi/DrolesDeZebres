@@ -39,6 +39,7 @@ Joueur::Joueur(string pseudo) :
  }*/
 
 void Joueur::jouer(Plateau* plateau, Partie* partie) {
+	cout<<endl;
 	cout << "+--------------------------------------+" << endl;
 	cout << "          Tour de : " << pseudo << endl;
 	cout << "+--------------------------------------+" << endl;
