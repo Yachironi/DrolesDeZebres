@@ -14,38 +14,39 @@ void Partie::start() {
 	cout << "+-------------------------------------------+"<< endl;
 	cout<<endl<<endl;
 	//copy(inauguration.begin(), inauguration.end(), ostream_iterator<int>(cout, " "));
+/*
+	plateau->setCases(0, 0, new Gazelle(0));
+	plateau->setCases(0, 1, new Zebre(0));
+	plateau->setCases(0, 2, new Lion(0));
+	plateau->setCases(0, 3, new Zebre(1));
+	plateau->setCases(0, 4, new Zebre(1));
+	plateau->setCases(0, 5, new Zebre(1));
 
-//	plateau->setCases(0, 0, new Gazelle(0));
-//	plateau->setCases(0, 1, new Zebre(0));
-//	plateau->setCases(0, 2, new Lion(0));
-//	plateau->setCases(0, 3, new Zebre(1));
-//	plateau->setCases(0, 4, new Zebre(1));
-//	plateau->setCases(0, 5, new Zebre(1));
-//
-//	plateau->setCases(1, 0, new Gazelle(0));
-//	plateau->setCases(1, 1, new Zebre(0));
-//	plateau->setCases(1, 2, new Lion(0));
-//	plateau->setCases(1, 3, new Zebre(1));
-//	plateau->setCases(1, 4, new Zebre(1));
-//	plateau->setCases(1, 5, new Zebre(1));
-//
-//	plateau->setCases(2, 0, new Gazelle(0));
-//	plateau->setCases(2, 1, new Zebre(0));
-//	plateau->setCases(2, 2, new Lion(0));
-//	plateau->setCases(2, 3, new Zebre(1));
-//	plateau->setCases(2, 4, new Zebre(1));
-//	plateau->setCases(2, 5, new Zebre(1));
-//
-//	plateau->setCases(3, 0, new Gazelle(0));
-//	plateau->setCases(3, 1, new Zebre(0));
-//	plateau->setCases(3, 2, new Lion(0));
-//	plateau->setCases(3, 3, new Zebre(1));
-//	plateau->setCases(3, 4, new Zebre(1));
-//	plateau->setCases(3, 5, new Zebre(1));
-//
-//	plateau->setCases(4, 0, new Gazelle(0));
-//	plateau->setCases(4, 1, new Zebre(0));
-//	plateau->setCases(4, 2, new Lion(0));
+	plateau->setCases(1, 0, new Gazelle(0));
+	plateau->setCases(1, 1, new Zebre(0));
+	plateau->setCases(1, 2, new Lion(0));
+	plateau->setCases(1, 3, new Zebre(1));
+	plateau->setCases(1, 4, new Zebre(1));
+	plateau->setCases(1, 5, new Zebre(1));
+
+	plateau->setCases(2, 0, new Gazelle(0));
+	plateau->setCases(2, 1, new Zebre(0));
+	plateau->setCases(2, 2, new Lion(0));
+	plateau->setCases(2, 3, new Zebre(1));
+	plateau->setCases(2, 4, new Zebre(1));
+	plateau->setCases(2, 5, new Zebre(1));
+
+	plateau->setCases(3, 0, new Gazelle(0));
+	plateau->setCases(3, 1, new Zebre(0));
+	plateau->setCases(3, 2, new Lion(0));
+	plateau->setCases(3, 3, new Zebre(1));
+	plateau->setCases(3, 4, new Zebre(1));
+	plateau->setCases(3, 5, new Zebre(1));
+
+	plateau->setCases(4, 0, new Gazelle(0));
+	plateau->setCases(4, 1, new Zebre(0));
+	plateau->setCases(4, 2, new Lion(0));
+	plateau->setCases(4, 3, new Lion(0));*/
 
 	/*plateau->setCases(0, 2, pionJoueur2);
 	 plateau->setCases(1, 2, pionJoueur2);
@@ -107,17 +108,17 @@ void Partie::start() {
 }
 
 void Partie::continueOuQuitter() {
-	char commande;
-	cout<< "[ ENTER ] = Continuer | [ \'S\' ] = Sauvegarde : | [ \'Q\' ] = Quitter : "<<endl;
+	string commande;
+	cout<< "[ \'C\' ] = Continuer | [ \'S\' ] = Sauvegarde : | [ \'Q\' ] = Quitter : "<<endl;
 	cin.clear();
-	commande = cin.get();
 	//commande = cin.get();
-	if (commande != '\n') {
-		while (commande != 's' && commande != 'S' && commande != 'q'
-				&& commande != 'Q') {
+	//commande = cin.get();
+	cin >> commande;
+	if ((commande.compare("c")!=0)&&(commande.compare("C")!=0)) {
+		while ((commande.compare("s")!=0)&&(commande.compare("S")!=0)&&(commande.compare("q")!=0)&&(commande.compare("Q")!=0)&&(commande.compare("c")!=0)&&(commande.compare("C")!=0)) {
 			commande = cin.get();
 		}
-		if (commande == 'q' || commande == 'Q') {
+		if ((commande.compare("q")==0)||(commande.compare("Q")==0)) {
 			cout << "Sauvegarde ? [ o/n ] : ";
 			char commande = cin.get();
 			while (commande != 'o' && commande != 'n') {
@@ -127,8 +128,12 @@ void Partie::continueOuQuitter() {
 				enregistrer();
 				cout << "Sauvegarde fait avec succes." << endl;
 				cout << "Au revoir et a bientot..." << endl;
+				exit(0);
+			}else{
+				cout << "Au revoir et a bientot..." << endl;
+				exit(0);
 			}
-		} else if (commande == 'S' || commande == 's') {
+		} else if ((commande.compare("s")==0)||(commande.compare("S")==0)) {
 			enregistrer();
 			cout << "Sauvegarde fait avec succes." << endl;
 			cout << "Continuer ? [ o/n ] : ";
