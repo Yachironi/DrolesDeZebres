@@ -21,7 +21,7 @@ using namespace std;
 #include <iostream>
 #include <sstream>
 #include <cstdlib>
-//#include "stdlib.h"
+#include "stdlib.h"
 class JeuxFabrique {
 public:
 	static Partie* init();
@@ -102,13 +102,20 @@ Partie* JeuxFabrique::chargerPartie(string nomFichier) {
 	ImpalaJones* impalaJones = new ImpalaJones();
 	vector<Joueur*> joueurs;
 
-	joueurs.push_back(new Humain("1"));
-	joueurs.push_back(new Humain("2"));
-	partieFabrique = new Partie(plateau, impalaJones, joueurs);
-
 	char buffer[256];
 	fstream out;
-	out.open("partie1.txt", ios::in); //TODO change au meme nom du fichier
+	out.open(nomFichier.c_str(), ios::in);
+	/* charger et verifier le type de partie */
+	out.getline(buffer, 256, '\n');
+	if (stol(buffer) == 0) {
+		joueurs.push_back(new Humain("1"));
+		joueurs.push_back(new Humain("2"));
+	} else {
+		joueurs.push_back(new Ordinateur());
+		joueurs.push_back(new Humain("1"));
+	}
+
+	partieFabrique = new Partie(plateau, impalaJones, joueurs);
 	/* charger le plateau dans le fichier (5*6=30 lignes) */
 	for (int i = 0; i < 30; i++) {
 		out.getline(buffer, 256, '\n');
@@ -202,6 +209,11 @@ Partie* JeuxFabrique::chargerPartie(string nomFichier) {
 		//joueurs[i]->setPionsRestant(1,2,3,4,5);
 	}
 
+	/* charger isInnaugure(bool) */
+	out.getline(buffer, 256, '\n');
+	int isInnaugure = stol(buffer);
+	partieFabrique->setIsInnaugure(isInnaugure);
+
 	out.close();
 
 	return partieFabrique;
@@ -213,8 +225,19 @@ Partie* JeuxFabrique::initJeuxSauvgarde() {
 	string nomFichier;
 	cout << "Veillez Saisir le nom du fichier de sauvgarde :" << endl;
 	cin >> nomFichier;
-	while(nomFichier!="NONExiste"){
-		cin >> nomFichier;
+
+	while (1) {
+		//verifier nomFichier existe ou pas
+		fstream _file;
+		_file.open(nomFichier.c_str(), ios::in);
+		if (!_file) {
+			cout << nomFichier << " n'existe pas." << endl;
+			cout << "Veillez Saisir le nom du fichier de sauvgarde :" << endl;
+			cin >> nomFichier;
+		} else {
+			break;
+		}
+		_file.close();
 	}
 
 	partieFabrique = chargerPartie(nomFichier);
@@ -241,7 +264,7 @@ Partie* JeuxFabrique::initMultijoueur() {
 
 	partieFabrique = new Partie(plateau, impalaJones, joueurs);
 	cout << "==> ICI <===" << endl;
-	partieFabrique->setTypeParie(0);
+	partieFabrique->setTypePartie(0);
 	return partieFabrique;
 }
 Partie* JeuxFabrique::initContrePC() {
@@ -258,7 +281,7 @@ Partie* JeuxFabrique::initContrePC() {
 	joueurs.push_back(new Humain(pseudo));
 	partieFabrique = new Partie(plateau, impalaJones, joueurs);
 
-	partieFabrique->setTypeParie(1);
+	partieFabrique->setTypePartie(1);
 
 	return partieFabrique;
 }

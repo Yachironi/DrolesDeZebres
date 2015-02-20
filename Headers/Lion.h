@@ -1,4 +1,3 @@
-
 /***********************************************************************
  * Module:  Lion.h
  * Author:  Yasser RABI & Zheng ZHANG
@@ -16,7 +15,7 @@ using namespace std;
 class Lion: public Animal {
 public:
 	Lion(int idJoueur) :
-			Animal(false, 1, idJoueur, EFFRAYANT,"Lion") {
+			Animal(false, 1, idJoueur, EFFRAYANT, "Lion") {
 	}
 	~Lion() {
 

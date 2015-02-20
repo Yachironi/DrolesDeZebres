@@ -18,7 +18,7 @@ public:
 			Joueur(pseudo) {
 	}
 
-	~Humain(){
+	virtual ~Humain(){
 
 	}
 	int gettacticImpalaJonesPosition(Plateau* plateau);

@@ -39,7 +39,9 @@ Joueur::Joueur(string pseudo) :
  }*/
 
 void Joueur::jouer(Plateau* plateau, Partie* partie) {
-	cout << "### DEB ### Tour de ===>   " << pseudo << "   <===" << endl;
+	cout << "+--------------------------------------+" << endl;
+	cout << "          Tour de : " << pseudo << endl;
+	cout << "+--------------------------------------+" << endl;
 	int i = -1, j = -1;
 	if (plateau->getImpalaJones()->getPosition() == -1) {
 		cout << *plateau << endl;
@@ -78,9 +80,7 @@ void Joueur::jouer(Plateau* plateau, Partie* partie) {
 			plateau->getImpalaJones()->setPosition(positionImpalaJones);
 		}
 		cout << *plateau << endl;
-
 	}
-	cout << "\n### FIN ### Tour de ===>   " << pseudo << "   <===\n" << endl;
 
 }
 void Joueur::inaugurationUpdate(int x, int y, Plateau* plateau,

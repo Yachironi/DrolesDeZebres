@@ -26,6 +26,7 @@ class Joueur {
 	static int id;
 public:
 	Joueur(string pseudo);
+	virtual ~Joueur(){};
 	void jouer(Plateau* plateau, Partie* partie);
 	bool isPionTypeEstDisponnible(int pionAdeposer);
 	void getPionsRestants();

@@ -14,9 +14,10 @@
 #include <vector>
 #include <cstdlib>
 #include <iostream>
-#include <stdlib.h>
+//#include <stdlib.h>
 #include<cstring>
 #include<string>
+//#include<strings.h>
 
 #include "Case.h"
 #include "Crocodile.h"
@@ -39,6 +40,8 @@ public:
 		//this->plateau->getImpalaJones() = new ImpalaJones();
 		this->plateau->getImpalaJones()->setPosition(
 				impalaJones->getPosition());
+		isInnaugure = false;
+		typePartie=0;
 	}
 	~Partie() {
 
@@ -65,7 +68,8 @@ public:
 
 	string getImpalaJonesPossibleString(Plateau* plateau);
 
-	bool isImpalaPositionDisponnible(int positionImpalaJones,int* positionImpalaPossible);
+	bool isImpalaPositionDisponnible(int positionImpalaJones,
+			int* positionImpalaPossible);
 	/* enregistrer la partie */
 	void enregistrer();
 
@@ -97,19 +101,19 @@ public:
 		this->tour = tour;
 	}
 
-	int getTypeParie() const {
-		return typeParie;
+	int getTypePartie() const {
+		return typePartie;
 	}
 
-	void setTypeParie(int typeParie) {
-		this->typeParie = typeParie;
+	void setTypePartie(int typeParie) {
+		this->typePartie = typeParie;
 	}
 
 protected:
 private:
 	Plateau* plateau;
 	vector<Joueur*> joueurs;
-	int typeParie;
+	int typePartie;
 	int tour = -1;
 	bool isInnaugure;
 };

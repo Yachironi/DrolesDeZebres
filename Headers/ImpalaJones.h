@@ -1,4 +1,3 @@
-
 /***********************************************************************
  * Module:  ImpalaJones.h
  * Author:  Yasser RABI & Zheng ZHANG

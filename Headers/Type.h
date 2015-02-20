@@ -9,10 +9,7 @@
 #define DROLESDEZEBRES_HEADERS_TYPE_H_
 
 enum TypeAnimal {
-        EFFRAYANT,
-        EFFRAYE,
-        NEUTRE,
-		SAUTEUR
-    };
+	EFFRAYANT, EFFRAYE, NEUTRE, SAUTEUR
+};
 
 #endif /* DROLESDEZEBRES_HEADERS_TYPE_H_ */

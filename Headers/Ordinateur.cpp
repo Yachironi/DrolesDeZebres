@@ -17,7 +17,8 @@ int Ordinateur::gettacticImpalaJonesPosition(Plateau* plateau) {
 	int positionImpalaJones = -1;
 	//cout<<"==> ICI <=="<<endl;
 	/* Intelligence Artificiel */
-	int* impalaPossiblePosition = plateau->getImpalaJones()->getPositionPossible(plateau);
+	int* impalaPossiblePosition =
+			plateau->getImpalaJones()->getPositionPossible(plateau);
 	if (plateau->getImpalaJones()->getPosition() == -1) {
 		positionImpalaJones = rand() % 22;
 		//cout<<"==> F ICI 1 <=="<<endl;

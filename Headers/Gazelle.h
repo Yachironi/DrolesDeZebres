@@ -1,4 +1,3 @@
-
 /***********************************************************************
  * Module:  Gazelle.h
  * Author:  Yasser RABI & Zheng ZHANG
@@ -13,11 +12,10 @@ using namespace std;
 
 #include "Animal.h"
 
-class Gazelle : public Animal
-{
+class Gazelle: public Animal {
 public:
 	Gazelle(int idJoueur) :
-			Animal(false, 2, idJoueur, EFFRAYE,"Gazelle") {
+			Animal(false, 2, idJoueur, EFFRAYE, "Gazelle") {
 	}
 	~Gazelle() {
 

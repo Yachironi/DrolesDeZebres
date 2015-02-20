@@ -1,4 +1,3 @@
-
 /***********************************************************************
  * Module:  Ordinateur.h
  * Author:  Yasser RABI & Zheng ZHANG
@@ -13,12 +12,12 @@
 
 using namespace std;
 
-
-class Ordinateur : public Joueur
-{
+class Ordinateur: public Joueur {
 public:
-	Ordinateur() :Joueur("Ordinateur"){
-		}
+	Ordinateur() :
+			Joueur("Ordinateur") {
+	}
+virtual ~Ordinateur(){}
 	int gettacticImpalaJonesPosition(Plateau* plateau);
 	int* gettacticPositionPionAdeposer(Plateau* plateau);
 	int gettacticTypePionAdeposer();

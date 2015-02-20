@@ -290,7 +290,7 @@ bool ImpalaJones::mouvementEstPossible(int i, int j) {
 		}
 	} else if (position >= 6 && position <= 10) {
 		//cout<<"entree 3 "<<endl;
-		if ((i == position-6))
+		if ((i == position - 6))
 			return true;
 		else {
 			cout << "Position Invalide" << endl;

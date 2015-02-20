@@ -1,4 +1,3 @@
-
 /***********************************************************************
  * Module:  Pion.h
  * Author:  Yasser RABI & Zheng ZHANG
@@ -17,14 +16,14 @@ using namespace std;
 
 class Pion {
 public:
-	Pion(bool cache, int valeur, int idJoueur,string intitulePion) {
+	Pion(bool cache, int valeur, int idJoueur, string intitulePion) {
 		this->cache = cache;
 		this->valeur = valeur;
 		this->position = position;
 		this->idJoueur = idJoueur;
 		this->position.x = -1;
 		this->position.y = -1;
-		this->intitulePion=intitulePion;
+		this->intitulePion = intitulePion;
 	}
 	~Pion() {
 
@@ -61,7 +60,7 @@ public:
 		this->intitulePion = intitulePion;
 	}
 
-int getIdJoueur() const {
+	int getIdJoueur() const {
 		return idJoueur;
 	}
 //virtual string getType();

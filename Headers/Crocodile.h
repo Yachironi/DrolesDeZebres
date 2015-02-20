@@ -1,4 +1,3 @@
-
 /***********************************************************************
  * Module:  Crocodile.h
  * Author:  Yasser RABI & Zheng ZHANG
@@ -16,7 +15,7 @@ using namespace std;
 class Crocodile: public Animal {
 public:
 	Crocodile(int idJoueur) :
-			Animal(false, 0, idJoueur, SAUTEUR,"Crocodile") {
+			Animal(false, 0, idJoueur, SAUTEUR, "Crocodile") {
 	}
 	~Crocodile() {
 

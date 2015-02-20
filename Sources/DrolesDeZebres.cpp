@@ -14,7 +14,7 @@
 #include "../Headers/Plateau.h"
 #include "../Headers/ImpalaJones.h"
 
-/* test */
+/* test  ssd*/
 using namespace std;
 enum TypeJeux {
 	chargerPartie = 0, nouvellePartie = 1
@@ -27,11 +27,18 @@ int main(int argc, char **argv) {
 	impalaJones.getPositionPossible(plateau);
 */
 
+	//==============================
+
+
+
+	//==============================
+
+
+
+
 	//test affichage
-	map<char, int> impalaPositions;
 	Partie* partie = JeuxFabrique::init();
 	partie->start();
-
 
 	/*Elephant* elephant = new Elephant();
 	cout<<*elephant<<endl;*/

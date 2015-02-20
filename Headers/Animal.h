@@ -15,7 +15,9 @@ using namespace std;
 
 class Animal: public Pion {
 public:
-	Animal(bool cache, int valeur,int idJoueur,TypeAnimal type,string intitulePion):Pion(cache,valeur,idJoueur,intitulePion),type(type){
+	Animal(bool cache, int valeur, int idJoueur, TypeAnimal type,
+			string intitulePion) :
+			Pion(cache, valeur, idJoueur, intitulePion), type(type) {
 	}
 	TypeAnimal getType() const {
 		return type;
@@ -25,8 +27,8 @@ public:
 		this->type = type;
 	}
 	/*virtual string getType(){
-return NULL;
-	}*/
+	 return NULL;
+	 }*/
 
 protected:
 private:
